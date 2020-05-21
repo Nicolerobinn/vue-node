@@ -7,6 +7,7 @@ const My = r => require.ensure([], () => r(require('@/page/My')), 'Home');
 const Cart = r => require.ensure([], () => r(require('@/page/Cart')), 'Home');
 const Discover = r => require.ensure([], () => r(require('@/page/Discover')), 'Home');
 const Classify = r => require.ensure([], () => r(require('@/page/Classify')), 'Home');
+const Secarch = r => require.ensure([], () => r(require('@/page/Secarch')), 'Home');
 
 Vue.use(Router)
 
@@ -29,32 +30,38 @@ const router = new Router({
     {
       path: '/home',
       name: 'home',
-      meta: { title: '', isleftarrow:true  },
+      meta: { title: '', isleftarrow: true },
       component: Home
     },
     {
       path: '/my',
       name: 'my',
-      meta: { title: '我的', isleftarrow:true  },
+      meta: { title: '我的', isleftarrow: true },
       component: My
     },
     {
       path: '/classify',
       name: 'classify',
-      meta: { title: '分类', isleftarrow:true  },
+      meta: { title: '分类', isleftarrow: true },
       component: Classify
     },
     {
       path: '/discover',
       name: 'discover',
-      meta: { title: '发现', isleftarrow:true  },
+      meta: { title: '发现', isleftarrow: true },
       component: Discover
     },
     {
       path: '/cart',
       name: 'cart',
-      meta: { title: '购物车', isleftarrow:true  },
+      meta: { title: '购物车', isleftarrow: true },
       component: Cart
+    },
+    {
+      path: '/secarch',
+      name: 'secarch',
+      meta: { isleftarrow: true },
+      component: Secarch
     }
   ]
 })

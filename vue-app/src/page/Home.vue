@@ -1,9 +1,25 @@
 /* eslint-disable */
 <template>
   <div>
-      <nav-bar :title="title"/>
-      <search  />
-      <tab-bar/>
+    <nav-bar />
+    <search />
+    <div class="swiper-box">
+      <van-swipe :loop="false" class="my-swipe" indicator-color="white">
+        <van-swipe-item>
+          <img src="../assets/images/home-img1.jpg" alt="">
+        </van-swipe-item>
+        <van-swipe-item>
+          <img src="../assets/images/home-img2.jpg" alt="">
+        </van-swipe-item>
+        <van-swipe-item>
+          <img src="../assets/images/home-img1.jpg" alt="">
+        </van-swipe-item>
+        <van-swipe-item>
+          <img src="../assets/images/home-img2.jpg" alt="">
+        </van-swipe-item>
+      </van-swipe>
+    </div>
+    <tab-bar />
   </div>
 </template>
 <script>
@@ -14,14 +30,13 @@
     name: "Home",
     data() {
       return {
-        title:'首页'
       };
     },
-    components:{
+    components: {
       navBar,
       tabBar,
       search
-     },
+    },
     methods: {
     },
   };
