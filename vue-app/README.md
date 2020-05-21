@@ -28,3 +28,10 @@ npm install vuex --save
 # router中
 对路由按需加载 我们这里使用的是webpack的语法require.ensure
 写入路由守卫,在以后用来做登录判断等功能
+
+# rem布局
+util/rem.js引入到main.js中
+安装 postcss-pxtorem
+npm install postcss-pxtorem -D
+# 引入相关字体
+在assets/css/font 文件夹内放置字体

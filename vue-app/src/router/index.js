@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 const Index = r => require.ensure([], () => r(require('@/page/Index')), 'Home');
+const Home = r => require.ensure([], () => r(require('@/page/Home')), 'Home');
+const Login = r => require.ensure([], () => r(require('@/page/Login')), 'Home');
 
 Vue.use(Router)
 
@@ -14,6 +16,16 @@ const router = new Router({
       path: '/index',
       name: 'index',
       component: Index
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: Login
+    },
+    {
+      path: '/home',
+      name: 'home',
+      component: Home
     }
   ]
 })

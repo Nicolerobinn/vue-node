@@ -11,6 +11,12 @@
   font-family: 'Microsoft YaHei';
 }
 
+
+@font-face {
+  font-family: 'SourceHanSansCN';
+  src: url('font/SourceHanSansCN-Bold.otf');
+}
+
 html {
   background: white;
   color: black;
