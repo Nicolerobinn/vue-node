@@ -9,7 +9,7 @@
   import navBar from '../components/navBar'
   import tabBar from '../components/tabBar'
   export default {
-    name: "Home",
+    name: "Discover",
     data() {
       return {
       };
@@ -24,5 +24,5 @@
 </script>
 
 <style lang="scss" scoped>
-  @import "../assets/css/home.scss";
+  @import "../assets/css/discover.scss";
 </style>

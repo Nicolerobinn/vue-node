@@ -30,6 +30,7 @@
     methods: {
       open() {
         localStorage.setItem('openNow', '1')
+        this.$router.push('/home')
       }
     },
   };

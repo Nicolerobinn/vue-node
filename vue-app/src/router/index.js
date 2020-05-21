@@ -3,6 +3,10 @@ import Router from 'vue-router'
 const Index = r => require.ensure([], () => r(require('@/page/Index')), 'Home');
 const Home = r => require.ensure([], () => r(require('@/page/Home')), 'Home');
 const Login = r => require.ensure([], () => r(require('@/page/Login')), 'Home');
+const My = r => require.ensure([], () => r(require('@/page/My')), 'Home');
+const Cart = r => require.ensure([], () => r(require('@/page/Cart')), 'Home');
+const Discover = r => require.ensure([], () => r(require('@/page/Discover')), 'Home');
+const Classify = r => require.ensure([], () => r(require('@/page/Classify')), 'Home');
 
 Vue.use(Router)
 
@@ -26,6 +30,26 @@ const router = new Router({
       path: '/home',
       name: 'home',
       component: Home
+    },
+    {
+      path: '/my',
+      name: 'my',
+      component: My
+    },
+    {
+      path: '/classify',
+      name: 'classify',
+      component: Classify
+    },
+    {
+      path: '/discover',
+      name: 'discover',
+      component: Discover
+    },
+    {
+      path: '/cart',
+      name: 'cart',
+      component: Cart
     }
   ]
 })
