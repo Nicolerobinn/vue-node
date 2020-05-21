@@ -29,26 +29,31 @@ const router = new Router({
     {
       path: '/home',
       name: 'home',
+      meta: { title: '', isleftarrow:true  },
       component: Home
     },
     {
       path: '/my',
       name: 'my',
+      meta: { title: '我的', isleftarrow:true  },
       component: My
     },
     {
       path: '/classify',
       name: 'classify',
+      meta: { title: '分类', isleftarrow:true  },
       component: Classify
     },
     {
       path: '/discover',
       name: 'discover',
+      meta: { title: '发现', isleftarrow:true  },
       component: Discover
     },
     {
       path: '/cart',
       name: 'cart',
+      meta: { title: '购物车', isleftarrow:true  },
       component: Cart
     }
   ]

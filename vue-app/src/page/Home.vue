@@ -1,22 +1,26 @@
 /* eslint-disable */
 <template>
   <div>
-      <nav-bar/>
+      <nav-bar :title="title"/>
+      <search  />
       <tab-bar/>
   </div>
 </template>
 <script>
   import navBar from '../components/navBar'
   import tabBar from '../components/tabBar'
+  import search from '../components/search'
   export default {
     name: "Home",
     data() {
       return {
+        title:'首页'
       };
     },
     components:{
       navBar,
-      tabBar
+      tabBar,
+      search
      },
     methods: {
     },
