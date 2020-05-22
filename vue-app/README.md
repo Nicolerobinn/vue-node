@@ -35,3 +35,5 @@ util/rem.js引入到main.js中
 npm install postcss-pxtorem -D
 # 引入相关字体
 在assets/css/font 文件夹内放置字体
+# 加入mock.js axios，封装mock xios
+相关资料https://www.jianshu.com/p/c5568910e946

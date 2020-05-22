@@ -13,10 +13,14 @@
 
 
 @font-face {
-  font-family: 'SourceHanSansCN';
+  font-family: 'SourceHanSansCN-Bold';
   src: url('font/SourceHanSansCN-Bold.otf');
 }
 
+@font-face {
+  font-family: 'SourceHanSansCN';
+  src: url('font/SourceHanSansCN-Regular.ttf');
+}
 html {
   background: white;
   color: black;

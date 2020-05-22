@@ -1,7 +1,7 @@
 /* eslint-disable */
 <template>
   <div>
-    <van-nav-bar left-text="返回" left-arrow right-text="消息" @click-left="onClickLeft" @click-right="onClickRight">
+    <van-nav-bar   @click-left="onClickLeft" @click-right="onClickRight">
       <template #left>
         <van-icon name="location" />
         <span class="location">1123311111111111333231232</span>
@@ -15,7 +15,7 @@
 <script>
   import { Toast } from 'vant';
   export default {
-    name: "Home",
+    name: "navBar",
     props: [],
     data() {
       return {

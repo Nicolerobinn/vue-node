@@ -8,7 +8,7 @@
 
  // 环境的切换
  if (process.env.NODE_ENV == 'development') {
-     axios.defaults.baseURL = '';
+     axios.defaults.baseURL = 'http://api.7-orange.cn:7300/mock/5def6a2d448e330a1116366e/api/';
      //配合mock
  } else if (process.env.NODE_ENV == 'debug') {
      axios.defaults.baseURL = '';

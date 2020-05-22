@@ -1,6 +1,8 @@
 .swiper-box {
-  padding: 0 15px 10px;
-  background-color: #1AC694;
+  padding: 0 15px ;
+  background: #1AC694; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to bottom, #1AC694, #fff); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to bottom, #1AC694, #fff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
   .my-swipe .van-swipe-item {
     border-radius: 15px;
@@ -18,4 +20,29 @@
       height: 100%;
     }
   }
+}
+.banner{
+  overflow: hidden;
+  >div{
+     width: 20%;
+     float: left;
+     height: 80px;
+     text-align: center;
+     img{
+       width: 42px;
+     }
+     p{
+       margin: 4px 0;
+      font-size:12px;
+      color:rgba(77,77,77,1);
+     }
+  }
+}
+.img-box{
+  img{
+    width: 100%;
+  }
+}
+.commodity{
+  padding: 0 15px;
 }
