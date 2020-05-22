@@ -8,6 +8,9 @@ const Cart = r => require.ensure([], () => r(require('@/page/Cart')), 'Home');
 const Discover = r => require.ensure([], () => r(require('@/page/Discover')), 'Home');
 const Classify = r => require.ensure([], () => r(require('@/page/Classify')), 'Home');
 const Secarch = r => require.ensure([], () => r(require('@/page/Secarch')), 'Home');
+const Location = r => require.ensure([], () => r(require('@/page/Location')), 'Home');
+const NewLocation = r => require.ensure([], () => r(require('@/page/NewLocation')), 'Home');
+const Map = r => require.ensure([], () => r(require('@/page/Map')), 'Home');
 
 Vue.use(Router)
 
@@ -30,38 +33,56 @@ const router = new Router({
     {
       path: '/home',
       name: 'home',
-      meta: { title: '', isleftarrow: true },
+      meta: { title: '', isLocaltion: true },
       component: Home
     },
     {
       path: '/my',
       name: 'my',
-      meta: { title: '我的', isleftarrow: true },
+      meta: { title: '我的'},
       component: My
     },
     {
       path: '/classify',
       name: 'classify',
-      meta: { title: '分类', isleftarrow: true },
+      meta: { title: '分类'},
       component: Classify
     },
     {
       path: '/discover',
       name: 'discover',
-      meta: { title: '发现', isleftarrow: true },
+      meta: { title: '发现'},
       component: Discover
     },
     {
       path: '/cart',
       name: 'cart',
-      meta: { title: '购物车', isleftarrow: true },
+      meta: { title: '购物车'},
       component: Cart
     },
     {
       path: '/secarch',
       name: 'secarch',
-      meta: { isleftarrow: true },
+      meta: {  },
       component: Secarch
+    },
+    {
+      path: '/location',
+      name: 'location',
+      meta: { isBack: true ,title:'选择收货地址'},
+      component: Location
+    },
+    {
+      path: '/newlocation',
+      name: 'newlocation',
+      meta: { isBack: true ,title:'添加地址'},
+      component: NewLocation
+    },
+    {
+      path: '/map',
+      name: 'map',
+      meta: { isBack: true ,title:'选择地址'},
+      component: Map
     }
   ]
 })

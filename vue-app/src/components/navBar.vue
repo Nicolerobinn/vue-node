@@ -1,10 +1,10 @@
 /* eslint-disable */
 <template>
   <div>
-    <van-nav-bar   @click-left="onClickLeft" @click-right="onClickRight">
-      <template #left>
-        <van-icon name="location" />
-        <span class="location">1123311111111111333231232</span>
+    <van-nav-bar    @click-right="onClickRight">
+      <template #left v-if="isLocaltion"  >
+        <van-icon  @click="goTo" name="location" />
+        <span  @click="goTo" class="location">1123311111111111333231232</span>
       </template>
       <template #right>
         <van-icon name="chat-o" />
@@ -19,19 +19,20 @@
     props: [],
     data() {
       return {
+        isLocaltion:false
       };
     },
     mounted() {
-      this.isleftarrow = this.$route.meta.isleftarrow;
+      this.isLocaltion = this.$route.meta.isLocaltion;
     },
     watch: {
       $route(to, from) {
-        this.isleftarrow = to.meta.isleftarrow;
+        this.isLocaltion = to.meta.isLocaltion;
       }
     },
     methods: {
-      onClickLeft() {
-        Toast('返回');
+      goTo() {
+        this.$router.push('/location')
       },
       onClickRight() {
         Toast('按钮');
