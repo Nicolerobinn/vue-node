@@ -5,8 +5,8 @@ import './utils/rem'
 import './assets/css/base.css'
 import App from './App'
 import router from './router'
-import store from './store/store'
-
+import store from './store/index'
+require('./mock');
 Vue.config.productionTip = false
 import 'vant/lib/index.css';
 import Vant,{Lazyload} from 'vant';
