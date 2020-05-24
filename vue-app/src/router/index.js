@@ -1,91 +1,97 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-const Index = r => require.ensure([], () => r(require('@/page/Index')), 'Home');
-const Home = r => require.ensure([], () => r(require('@/page/Home')), 'Home');
-const Login = r => require.ensure([], () => r(require('@/page/Login')), 'Home');
-const My = r => require.ensure([], () => r(require('@/page/My')), 'Home');
-const Cart = r => require.ensure([], () => r(require('@/page/Cart')), 'Home');
-const Discover = r => require.ensure([], () => r(require('@/page/Discover')), 'Home');
-const Classify = r => require.ensure([], () => r(require('@/page/Classify')), 'Home');
-const Secarch = r => require.ensure([], () => r(require('@/page/Secarch')), 'Home');
-const Location = r => require.ensure([], () => r(require('@/page/Location')), 'Home');
-const NewLocation = r => require.ensure([], () => r(require('@/page/NewLocation')), 'Home');
-const Map = r => require.ensure([], () => r(require('@/page/Map')), 'Home');
+import Vue from "vue";
+import Router from "vue-router";
+const Index = r => require.ensure([], () => r(require("@/page/Index")), "Home");
+const Home = r =>
+  require.ensure([], () => r(require("@/page/home/Home")), "Home");
+const Login = r => require.ensure([], () => r(require("@/page/Login")), "Home");
+const My = r => require.ensure([], () => r(require("@/page/My")), "Home");
+const Cart = r => require.ensure([], () => r(require("@/page/Cart")), "Home");
+const Discover = r =>
+  require.ensure([], () => r(require("@/page/Discover")), "Home");
+const Classify = r =>
+  require.ensure([], () => r(require("@/page/Classify")), "Home");
+const Secarch = r =>
+  require.ensure([], () => r(require("@/page/Secarch")), "Home");
+const Location = r =>
+  require.ensure([], () => r(require("@/page/Location")), "Home");
+const NewLocation = r =>
+  require.ensure([], () => r(require("@/page/NewLocation")), "Home");
+const Map = r => require.ensure([], () => r(require("@/page/Map")), "Home");
 
-Vue.use(Router)
+Vue.use(Router);
 
 const router = new Router({
   routes: [
     {
-      path: '/',
-      redirect: 'index'
+      path: "/",
+      redirect: "index"
     },
     {
-      path: '/index',
-      name: 'index',
+      path: "/index",
+      name: "index",
       component: Index
     },
     {
-      path: '/login',
-      name: 'login',
+      path: "/login",
+      name: "login",
       component: Login
     },
     {
-      path: '/home',
-      name: 'home',
-      meta: { title: '', isLocaltion: true },
+      path: "/home",
+      name: "home",
+      meta: { title: "", isLocaltion: true },
       component: Home
     },
     {
-      path: '/my',
-      name: 'my',
-      meta: { title: '我的'},
+      path: "/my",
+      name: "my",
+      meta: { title: "我的" },
       component: My
     },
     {
-      path: '/classify',
-      name: 'classify',
-      meta: { title: '分类'},
+      path: "/classify",
+      name: "classify",
+      meta: { title: "分类" },
       component: Classify
     },
     {
-      path: '/discover',
-      name: 'discover',
-      meta: { title: '发现'},
+      path: "/discover",
+      name: "discover",
+      meta: { title: "发现" },
       component: Discover
     },
     {
-      path: '/cart',
-      name: 'cart',
-      meta: { title: '购物车'},
+      path: "/cart",
+      name: "cart",
+      meta: { title: "购物车" },
       component: Cart
     },
     {
-      path: '/secarch',
-      name: 'secarch',
-      meta: {  },
+      path: "/secarch",
+      name: "secarch",
+      meta: {},
       component: Secarch
     },
     {
-      path: '/location',
-      name: 'location',
-      meta: { isBack: true ,title:'选择收货地址'},
+      path: "/location",
+      name: "location",
+      meta: { isBack: true, title: "选择收货地址" },
       component: Location
     },
     {
-      path: '/newlocation',
-      name: 'newlocation',
-      meta: { isBack: true ,title:'添加地址'},
+      path: "/newlocation",
+      name: "newlocation",
+      meta: { isBack: true, title: "添加地址" },
       component: NewLocation
     },
     {
-      path: '/map',
-      name: 'map',
-      meta: { isBack: true ,title:'选择地址'},
+      path: "/map",
+      name: "map",
+      meta: { isBack: true, title: "选择地址" },
       component: Map
     }
   ]
-})
+});
 router.beforeEach((to, from, next) => {
   // to: Route: 即将要进入的目标 路由对象
   // from: Route: 当前导航正要离开的路由

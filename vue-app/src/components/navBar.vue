@@ -1,10 +1,10 @@
 /* eslint-disable */
 <template>
   <div>
-    <van-nav-bar    @click-right="onClickRight">
-      <template #left v-if="isLocaltion"  >
-        <van-icon  @click="goTo" name="location" />
-        <span  @click="goTo" class="location">1123311111111111333231232</span>
+    <van-nav-bar @click-right="onClickRight">
+      <template #left v-if="isLocaltion">
+        <van-icon @click="goTo" name="location" />
+        <span @click="goTo" class="location">1123311111111111333231232</span>
       </template>
       <template #right>
         <van-icon name="chat-o" />
@@ -13,54 +13,56 @@
   </div>
 </template>
 <script>
-  import { Toast } from 'vant';
-  export default {
-    name: "navBar",
-    props: [],
-    data() {
-      return {
-        isLocaltion:false
-      };
+import { Toast } from "vant";
+export default {
+  name: "navBar",
+  props: [],
+  data() {
+    return {
+      isLocaltion: false
+    };
+  },
+  mounted() {
+    this.isLocaltion = this.$route.meta.isLocaltion;
+  },
+  watch: {
+    $route(to, from) {
+      this.isLocaltion = to.meta.isLocaltion;
+    }
+  },
+  methods: {
+    goTo() {
+      this.$router.push("/location");
     },
-    mounted() {
-      this.isLocaltion = this.$route.meta.isLocaltion;
-    },
-    watch: {
-      $route(to, from) {
-        this.isLocaltion = to.meta.isLocaltion;
-      }
-    },
-    methods: {
-      goTo() {
-        this.$router.push('/location')
-      },
-      onClickRight() {
-        Toast('按钮');
-      },
-    },
-  };
+    onClickRight() {
+      Toast("按钮");
+    }
+  }
+};
 </script>
 
 <style lang="scss" scoped>
-  .van-nav-bar {
+.van-nav-bar {
+  overflow: hidden;
+  background-color: #1ac694;
+  min-height: 1.5rem;
+
+  .location {
+    font-size: 16px;
+    color: #fff;
+    font-family: SourceHanSansCN;
+    max-width: 150px;
     overflow: hidden;
-    background-color: #1AC694;
-    min-height: 1.5rem;
-
-    .location {
-      font-size: 16px;
-      color: #fff;
-      font-family: SourceHanSansCN;
-      max-width: 150px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-
-    }
-
-    .van-icon {
-      font-size: 20px;
-      color: #fff
-    }
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
+
+  .van-icon {
+    font-size: 20px;
+    color: #fff;
+  }
+}
+.van-hairline--bottom::after {
+  border: 0 solid #1ac694;
+}
 </style>
