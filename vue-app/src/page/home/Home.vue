@@ -5,11 +5,13 @@
     <search />
     <swiper :swiperImages="swiperImages" />
     <banner :bannerImages="bannerImages" :bannerImg="bannerImg" />
-    <scrollX :time="time" />
+    <scrollX :time="time" :arr="scrollImages" />
+    <product/>
     <tab-bar />
   </div>
 </template>
 <script>
+import product from "./components/product";
 import navBar from "@/components/navBar";
 import tabBar from "@/components/tabBar";
 import search from "@/components/search";
@@ -30,7 +32,8 @@ export default {
       ],
       bannerImg: "",
       bannerImages: [],
-      time: "1231231231231"
+      time: "1231231231231",
+      scrollImages:[]
     };
   },
   components: {
@@ -39,7 +42,8 @@ export default {
     search,
     scrollX,
     banner,
-    swiper
+    swiper,
+    product
   },
   mounted() {
     this.getImg();
@@ -49,6 +53,7 @@ export default {
       const query = await get(Urls.ddimg);
       this.bannerImg = query.data.list[1].image_url;
       this.bannerImages = query.data.list[2].icon_list;
+      this.scrollImages = query.data.list[7].product_list;
       console.log(query);
     }
   }

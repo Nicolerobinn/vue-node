@@ -57,3 +57,7 @@ npm install postcss-pxtorem -D
 
 相关资料 http://ustbhuangyi.github.io/better-scroll/doc/installation.html#npm
 npm install better-scroll --save
+
+# 引入 swiper
+相关资料https://www.swiper.com.cn/
+使用swiper来实现tab的滑动切换效果

@@ -29,8 +29,11 @@ export default {
   img {
     width: 100%;
   }
+  background-color: #fff;
 }
 .banner {
+
+  background-color: #fff;
   overflow: hidden;
   > div {
     width: 20%;

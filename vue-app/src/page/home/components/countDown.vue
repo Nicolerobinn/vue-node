@@ -26,6 +26,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.van-count-down{
+  padding: 0 15px;
+}
 .colon {
   display: inline-block;
   color: #ee0a24;

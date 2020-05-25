@@ -62,7 +62,7 @@ export default {
     color: #fff;
   }
 }
-.van-hairline--bottom::after {
-  border: 0 solid #1ac694;
+.van-hairline--bottom::after{
+  border: 0 solid #ebedf0;
 }
 </style>

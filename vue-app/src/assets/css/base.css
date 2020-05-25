@@ -196,4 +196,5 @@ a:focus, *:focus {
 
 html, body, #app {
   height: 100%;
+  background-color: rgba(201, 201, 201, 0.5);
 }
