@@ -6,7 +6,7 @@
     <swiper :swiperImages="swiperImages" />
     <banner :bannerImages="bannerImages" :bannerImg="bannerImg" />
     <scrollX :time="time" :arr="scrollImages" />
-    <product/>
+    <product :productList="productList"  :tabbarLlist="tabbarLlist" />
     <tab-bar />
   </div>
 </template>
@@ -33,7 +33,9 @@ export default {
       bannerImg: "",
       bannerImages: [],
       time: "1231231231231",
-      scrollImages:[]
+      scrollImages:[],
+      productList:[],
+      tabbarLlist:[]
     };
   },
   components: {
@@ -51,10 +53,15 @@ export default {
   methods: {
     async getImg() {
       const query = await get(Urls.ddimg);
-      this.bannerImg = query.data.list[1].image_url;
-      this.bannerImages = query.data.list[2].icon_list;
-      this.scrollImages = query.data.list[7].product_list;
-      console.log(query);
+      let res = query.data.list
+      this.bannerImg =res[1].image_url;
+      this.bannerImages =res[2].icon_list;
+      this.scrollImages =res[7].product_list;
+      // 给限时抢购赋值
+      this.productList =res[3].product_list;
+      // 给Tabbar 商品列表赋值
+      this.tabbarLlist =res[12].product_list;
+      console.log(res);
     }
   }
 };

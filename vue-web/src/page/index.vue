@@ -1,26 +1,44 @@
 /* eslint-disable */
 <template>
-  <div>
-    <el-switch v-model="value" active-color="#13ce66" inactive-color="#ff4949">
-    </el-switch>
-    <div class="box1"></div>
+  <div id="box" >
+    <el-row  style="height: 100%; ">
+        <el-col :span="4"   style="min-height: 100%; background-color: #324057;">
+          <SidBar/>
+        </el-col>
+        <el-col :span="20"  style="height: 100%;overflow: auto;" >
+          <div class="content">
+              <transition name="move" mode="out-in">
+                  <keep-alive>
+                      <router-view :key="key" v-if="exclude"></router-view>
+                  </keep-alive>
+              </transition>
+              <transition name="move" mode="out-in">
+                  <router-view :key="key" v-if="!exclude"></router-view>
+              </transition>
+          </div>
+        </el-col>
+    </el-row>
   </div>
 </template>
 <script>
+  import SidBar    from  '@/components/sidbar.vue'
   export default {
     name: "index",
     components: {
+      SidBar
     },
     data() {
       return {
         value: true
       };
     },
-    methods: {
-    },
-    mounted() {
-    },
-    created() {
+    computed:{
+        key() {
+            return this.$route.fullPath;
+        },
+        exclude() {
+            return this.$route.meta.keepAlive;
+        }
     }
   };
 </script>

@@ -3,7 +3,8 @@ const BASE_URL =
 const Urls = {
   send_code: "send_code",
   login_code: "login_code",
-  ddimg: BASE_URL + "/homeApi"
+  ddimg: BASE_URL + "/homeApi",
+  youlike:BASE_URL+ "cart/youlike"
 };
 
 export { Urls };

@@ -61,3 +61,6 @@ npm install better-scroll --save
 # 引入 swiper
 相关资料https://www.swiper.com.cn/
 使用swiper来实现tab的滑动切换效果
+
+# 引入瀑布流插件
+ npm i vue-waterfall2@latest --save

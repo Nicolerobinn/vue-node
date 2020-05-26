@@ -183,3 +183,6 @@ a:focus, *:focus {
 .fr {
   float: right;
 }
+html,body,#app{
+  height: 100%;
+}

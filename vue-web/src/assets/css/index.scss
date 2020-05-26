@@ -1,9 +1,8 @@
- $fontColor:red;
- $height:20px;
- $width:20px;
-
- .box1 {
-   background-color: $fontColor;
-   height: $height;
-   width: $width;
- }
+#box{
+  height: 100%;
+}
+  .content {
+    height:100%;
+    width: 100%;
+    background-color:skyblue;
+  }

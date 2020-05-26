@@ -16,20 +16,31 @@
     </div>
     <div class="swiper-container">
       <div class="swiper-wrapper">
-        <div class="swiper-slide" ref="viewBox">1111111111</div>
-        <div class="swiper-slide">22222222</div>
-        <div class="swiper-slide">333333333</div>
-        <div class="swiper-slide">444444444444</div>
+        <div class="swiper-slide" ref="viewBox">
+          <produceitem :arr="productList"/>
+        </div>
+        <div class="swiper-slide">
+          <produceitem :arr="tabbarLlist"/>
+        </div>
+        <div class="swiper-slide">
+          <produceitem :arr="productList"/>
+        </div>
+        <div class="swiper-slide">
+          <produceitem :arr="tabbarLlist"/>
+        </div>
       </div>
     </div>
 </div>
 </template>
 <script>
+import produceitem from "./produceitem";
 import Swiper from "swiper"
 import "swiper/css/swiper.css";
+import { Urls } from "@/utils/url";
+import { get, post } from "@/utils/http";
 export default {
   name: "product",
-  props: [],
+  props: {productList:Array,tabbarLlist:Array},
   data() {
     return {
       navList: [
@@ -43,6 +54,7 @@ export default {
     }
   },
   components: {
+    produceitem
   },
   methods: {
     tabClick(index) {
@@ -62,6 +74,7 @@ export default {
         resistanceRatio : 0,
         observer: true,//修改swiper自己或子元素时，自动初始化swiper
         observeParents: true,
+        autoHeight:true,
         on:{
               slideChangeTransitionEnd(){
                 const index = this.activeIndex
@@ -82,6 +95,7 @@ $smail-width:53%;
 
 .swiper-tab{
   margin-top: 10px;
+  background-color: #f5f5f5;
   ul{
     overflow: hidden;
     background-color: #fff;
@@ -118,29 +132,5 @@ $smail-width:53%;
       // }
     }
   }
-}
-
-
-
-  .swiper-container{
-
-  width: 100%;
-
-  margin:20px auto;
-
-  }
-
-.swiper-container .swiper-slide{
-
-height:400px;
-
-line-height: 400px;
-
-text-align: center;
-
-width:100%;
-
-background-color:#ddd;
-
 }
 </style>
