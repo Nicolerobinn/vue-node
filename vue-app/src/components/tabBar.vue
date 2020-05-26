@@ -24,6 +24,6 @@ export default {
 
 <style lang="scss" scoped>
 /deep/.van-tabbar__placeholder {
-  height: 54.6875px;
+  height: 54.6875px!important;
 }
 </style>

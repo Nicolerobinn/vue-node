@@ -1,30 +1,28 @@
 /* eslint-disable */
 <template>
-  <div>
+<div>
     <div class="swiper-tab " >
       <ul>
-        <li class="active" >
-          <p>快捷加购</p>
-          <p class="smail" >猜你喜欢</p>
-        </li>
-        <li>
-          <p>时实鲜货</p>
-          <p class="smail" >今天辛苦了</p>
-        </li>
-        <li class="smail" >
-          <p>叮咚上新</p>
-          <p class="smail" >买点不一样</p>
-        </li>
-        <li>
-          <p>上班带餐</p>
-          <p class="smail" >轻奢快手菜</p>
+        <li
+          v-for="(item,index) in navList"
+          :class="{'active':nowIndex===index}"
+          @click="tabClick(index)"
+          :key="index"
+            >
+          <p>{{item.name}}</p>
+          <p class="smail" >{{item.smailName}}</p>
         </li>
       </ul>
     </div>
-    <div class="swiper-content" >
-
+    <div class="swiper-container">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide" ref="viewBox">1111111111</div>
+        <div class="swiper-slide">22222222</div>
+        <div class="swiper-slide">333333333</div>
+        <div class="swiper-slide">444444444444</div>
+      </div>
     </div>
-  </div>
+</div>
 </template>
 <script>
 import Swiper from "swiper"
@@ -33,11 +31,49 @@ export default {
   name: "product",
   props: [],
   data() {
-    return {};
+    return {
+      navList: [
+        { name: '快捷加购',smailName:'强哥喜欢' },
+        { name: '时实鲜货',smailName:'今天辛苦了' },
+        { name: '强哥上新',smailName:'买点不一样' },
+        { name: '上班带餐',smailName:'强哥快手菜' },
+      ],
+      nowIndex: 0,
+      mySwiper: ''
+    }
   },
   components: {
   },
-  methods: {}
+  methods: {
+    tabClick(index) {
+      let nowIndex =  this.nowIndex
+      let ratio = 0
+      if(nowIndex-index>=2 || index-nowIndex>=2  ){
+          ratio = 0
+      }else{
+          ratio = 300
+      }
+      this.nowIndex = index;
+      this.mySwiper.slideTo(index, ratio, false);
+    },
+    initSwiper() {
+      const that = this
+      this.mySwiper = new Swiper('.swiper-container', {
+        resistanceRatio : 0,
+        observer: true,//修改swiper自己或子元素时，自动初始化swiper
+        observeParents: true,
+        on:{
+              slideChangeTransitionEnd(){
+                const index = this.activeIndex
+                that.nowIndex = index
+              },
+        }
+      });
+    },
+  },
+  mounted(){
+    this.initSwiper()
+  }
 };
 </script>
 
@@ -82,5 +118,29 @@ $smail-width:53%;
       // }
     }
   }
+}
+
+
+
+  .swiper-container{
+
+  width: 100%;
+
+  margin:20px auto;
+
+  }
+
+.swiper-container .swiper-slide{
+
+height:400px;
+
+line-height: 400px;
+
+text-align: center;
+
+width:100%;
+
+background-color:#ddd;
+
 }
 </style>
