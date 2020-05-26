@@ -6,13 +6,13 @@
             <img class="img" :src="item.small_image" >
           </div>
             <div>
-                        <p>
-                        {{item.name}}
-                    </p>
-                    <div class="cont-price">
-                        <p class="price">￥{{item.price}}</p>
-                        <p class="price old-price">￥{{item.origin_price}}</p>
-                    </div>
+                  <p>
+                      {{item.name}}
+                  </p>
+                  <div class="cont-price">
+                      <p class="price">￥{{item.price}}</p>
+                      <p class="price old-price">￥{{item.origin_price}}</p>
+                  </div>
             </div>
         </li>
       </ul>

@@ -1,5 +1,6 @@
 /* eslint-disable */
 <template>
+<van-pull-refresh v-model="isLoading" @refresh="onRefresh">
   <div>
     <nav-bar />
     <search />
@@ -8,8 +9,10 @@
     <scrollX :time="time" :arr="scrollImages" />
     <product :productList="productList"  :tabbarLlist="tabbarLlist" />
   </div>
+</van-pull-refresh>
 </template>
 <script>
+import { Toast } from 'vant';
 import navBar from "@/components/navBar";
 import search from "@/components/search";
 import { Urls } from "@/utils/url";
@@ -33,7 +36,8 @@ export default {
       time: "1231231231231",
       scrollImages:[],
       productList:[],
-      tabbarLlist:[]
+      tabbarLlist:[],
+      isLoading: false,
     };
   },
   components: {
@@ -48,6 +52,12 @@ export default {
     this.getImg();
   },
   methods: {
+    onRefresh() {
+      setTimeout(() => {
+        Toast('刷新成功');
+        this.isLoading = false;
+      }, 1000);
+    },
     async getImg() {
       const query = await get(Urls.ddimg);
       let res = query.data.list
