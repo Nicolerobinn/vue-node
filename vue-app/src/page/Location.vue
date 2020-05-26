@@ -24,7 +24,7 @@
             this.$router.back(-1)
         },
         onClickRight(){
-            this.$router.push('/newlocation')
+            this.$router.push('newlocation')
 
         },
     },

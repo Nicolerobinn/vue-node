@@ -8,7 +8,6 @@
         <van-icon  @click="goTo" name="arrow-left" />
       </template>
     </van-nav-bar>
-    <address-edit/>
  </div>
 </template>
 <script>

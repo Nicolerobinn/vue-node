@@ -18,7 +18,7 @@
     },
     methods: {
       goTo() {
-        this.$router.push('/secarch')
+        this.$router.push('secarch')
       }
     },
   };

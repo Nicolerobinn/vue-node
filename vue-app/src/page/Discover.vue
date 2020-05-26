@@ -2,12 +2,10 @@
 <template>
   <div>
       <nav-bar/>
-      <tab-bar/>
   </div>
 </template>
 <script>
   import navBar from '../components/navBar'
-  import tabBar from '../components/tabBar'
   export default {
     name: "Discover",
     data() {
@@ -16,7 +14,6 @@
     },
     components:{
       navBar,
-      tabBar
      },
     methods: {
     },

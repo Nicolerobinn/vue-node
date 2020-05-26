@@ -18,7 +18,9 @@ window.onload = function () {
 }
 
 </script>
-
-<style>
-  @import './assets/css/base.css';
+<style lang="scss">
+#app {
+  width: 100%;
+  height: 100%;
+}
 </style>

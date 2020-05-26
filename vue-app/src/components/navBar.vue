@@ -32,7 +32,7 @@ export default {
   },
   methods: {
     goTo() {
-      this.$router.push("/location");
+      this.$router.push("location");
     },
     onClickRight() {
       Toast("按钮");

@@ -7,13 +7,11 @@
     <banner :bannerImages="bannerImages" :bannerImg="bannerImg" />
     <scrollX :time="time" :arr="scrollImages" />
     <product :productList="productList"  :tabbarLlist="tabbarLlist" />
-    <tab-bar />
   </div>
 </template>
 <script>
 import product from "./components/product";
 import navBar from "@/components/navBar";
-import tabBar from "@/components/tabBar";
 import search from "@/components/search";
 import scrollX from "./components/scrollX";
 import banner from "./components/banner";
@@ -40,7 +38,6 @@ export default {
   },
   components: {
     navBar,
-    tabBar,
     search,
     scrollX,
     banner,
@@ -61,7 +58,6 @@ export default {
       this.productList =res[3].product_list;
       // 给Tabbar 商品列表赋值
       this.tabbarLlist =res[12].product_list;
-      console.log(res);
     }
   }
 };

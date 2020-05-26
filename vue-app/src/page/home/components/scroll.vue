@@ -70,7 +70,6 @@ export default {
   },
   watch: {
     arr: function(val, oldVal){
-        console.log(val)
         this.render(); // user中的age属性发生变化时，调用render方法
     }
 }
