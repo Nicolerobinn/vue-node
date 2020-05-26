@@ -34,7 +34,6 @@ import {
 } from "@/utils/type";
 
 export default {
-    // 注意:外界传值的参数一定要和定义的参数一致 例如 goodsID  isCheckedAll
     // 1.添加商品
     [ADD_GOODS](state, {
         goodsID,

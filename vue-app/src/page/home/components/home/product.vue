@@ -1,19 +1,21 @@
 /* eslint-disable */
 <template>
 <div>
-    <div class="swiper-tab " >
-      <ul>
-        <li
-          v-for="(item,index) in navList"
-          :class="{'active':nowIndex===index}"
-          @click="tabClick(index)"
-          :key="index"
-            >
-          <p>{{item.name}}</p>
-          <p class="smail" >{{item.smailName}}</p>
-        </li>
-      </ul>
-    </div>
+    <van-sticky :offset-top="40">
+      <div class="swiper-tab " >
+        <ul>
+          <li
+            v-for="(item,index) in navList"
+            :class="{'active':nowIndex===index}"
+            @click="tabClick(index)"
+            :key="index"
+              >
+            <p>{{item.name}}</p>
+            <p class="smail" >{{item.smailName}}</p>
+          </li>
+        </ul>
+      </div>
+    </van-sticky>
     <div class="swiper-container">
       <div class="swiper-wrapper">
         <div class="swiper-slide" ref="viewBox">
