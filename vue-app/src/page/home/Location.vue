@@ -42,5 +42,5 @@
 </script>
 
 <style lang="scss" scoped>
-  @import "../assets/css/location.scss";
+  @import "../../assets/css/location.scss";
 </style>

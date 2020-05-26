@@ -13,7 +13,7 @@
 </template>
 <script>
   import { Toast } from 'vant';
-  import addressEdit from '../components/addressEdit.vue'
+  import addressEdit from '@/components/addressEdit.vue'
   export default {
     name: "NewLocation",
     data() {
@@ -62,5 +62,5 @@
 </script>
 
 <style lang="scss" scoped>
-  @import "../assets/css/location.scss";
+  @import "../../assets/css/location.scss";
 </style>

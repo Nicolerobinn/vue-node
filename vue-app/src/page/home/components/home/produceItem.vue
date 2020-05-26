@@ -82,7 +82,7 @@ export default {
       display: block;
       // 等比缩小图片来适应元素的尺寸
       background-size: contain;
-      background-image: url("../../../assets/images/loadGif.gif");
+      background-image: url("../../../../assets/images/loadGif.gif");
     }
     .itemTitle {
       padding-left: 16px;

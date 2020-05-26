@@ -6,16 +6,16 @@ import state from '../store/state';
 
 // 懒加载二级组件 Tarbar
 const Home = () => import('@/page/home/Home.vue');
+const Location =  () => import("@/page/home/Location.vue")
+const Map =  () => import("@/page/home/Map.vue")
+const NewLocation =  () => import("@/page/home/NewLocation.vue")
+const Secarch =  () => import("@/page/home/Secarch.vue")
 const Index = r => require.ensure([], () => r(require("@/page/Index")), "Home");
 const Login = r => require.ensure([], () => r(require("@/page/Login")), "Home");
 const My = r => require.ensure([], () => r(require("@/page/My")), "Home");
 const Cart = r => require.ensure([], () => r(require("@/page/Cart")), "Home");
 const Discover = r => require.ensure([], () => r(require("@/page/Discover")), "Home");
 const Classify = r =>require.ensure([], () => r(require("@/page/Classify")), "Home");
-const Secarch = r =>require.ensure([], () => r(require("@/page/Secarch")), "Home");
-const Location =  () => import("@/page/Location.vue")
-const NewLocation = r => require.ensure([], () => r(require("@/page/NewLocation")), "Home");
-const Map = r => require.ensure([], () => r(require("@/page/Map")), "Home");
 
 const originalPush = Router.prototype.push
 Router.prototype.push = function push(location) {

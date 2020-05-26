@@ -10,14 +10,14 @@
   </div>
 </template>
 <script>
-import product from "./components/product";
 import navBar from "@/components/navBar";
 import search from "@/components/search";
-import scrollX from "./components/scrollX";
-import banner from "./components/banner";
-import swiper from "./components/swiper";
 import { Urls } from "@/utils/url";
 import { get, post } from "@/utils/http";
+import product from "./components/home/product";
+import scrollX from "./components/home/scrollX";
+import banner from "./components/home/banner";
+import swiper from "./components/home/swiper";
 export default {
   name: "Home",
   data() {
