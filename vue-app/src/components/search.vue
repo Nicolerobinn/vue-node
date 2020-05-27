@@ -1,11 +1,13 @@
 /* eslint-disable */
 <template>
+    <van-sticky :offset-top="0">
   <div class="secarch-router">
     <div class="secarch-input" @click="goTo">
       <div class="input-text">
-        <van-icon name="search" /><span>123123123</span></div>
+        <van-icon name="search" /><span>{{placeholder}}</span></div>
     </div>
   </div>
+    </van-sticky>
 </template>
 <script>
   export default {
@@ -13,7 +15,7 @@
     props: [],
     data() {
       return {
-        value: ''
+        placeholder: '快手菜'
       };
     },
     methods: {

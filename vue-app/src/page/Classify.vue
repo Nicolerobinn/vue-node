@@ -2,10 +2,12 @@
 <template>
   <div>
       <nav-bar/>
+      <search />
   </div>
 </template>
 <script>
-  import navBar from '../components/navBar'
+  import navBar from '@/components/navBar'
+  import search from "@/components/search";
   export default {
     name: "Classify",
     data() {
@@ -14,6 +16,7 @@
     },
     components:{
       navBar,
+      search
      },
     methods: {
     },

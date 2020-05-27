@@ -1,7 +1,7 @@
 /* eslint-disable */
 <template>
 <div>
-    <van-sticky :offset-top="40">
+    <van-sticky :offset-top="0">
       <div class="swiper-tab " >
         <ul>
           <li
@@ -134,5 +134,8 @@ $smail-width:53%;
       // }
     }
   }
+}
+/deep/ .van-sticky--fixed{
+  top: 40px!important;
 }
 </style>
