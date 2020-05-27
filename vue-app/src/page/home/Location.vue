@@ -43,4 +43,11 @@
 
 <style lang="scss" scoped>
   @import "../../assets/css/location.scss";
+  $color:#1AC694;
+  .van-nav-bar .van-icon{
+    color: $color;
+  }
+  /deep/ .van-nav-bar__text{
+    color: $color!important;
+  }
 </style>

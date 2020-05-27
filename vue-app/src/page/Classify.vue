@@ -1,12 +1,10 @@
 /* eslint-disable */
 <template>
   <div>
-      <nav-bar/>
-      <search />
+      <search  />
   </div>
 </template>
 <script>
-  import navBar from '@/components/navBar'
   import search from "@/components/search";
   export default {
     name: "Classify",
@@ -15,7 +13,6 @@
       };
     },
     components:{
-      navBar,
       search
      },
     methods: {

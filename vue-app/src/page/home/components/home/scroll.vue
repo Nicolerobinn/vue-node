@@ -3,17 +3,17 @@
       <ul class="cont" ref="cont">
         <li class="cont-item" v-for="item of arr" :key="item.id">
           <div class="cont-img">
-            <img class="img" :src="item.small_image" >
-          </div>
-            <div>
-                  <p>
-                      {{item.name}}
-                  </p>
-                  <div class="cont-price">
-                      <p class="price">￥{{item.price}}</p>
-                      <p class="price old-price">￥{{item.origin_price}}</p>
-                  </div>
+              <img class="img" :src="item.small_image" >
             </div>
+            <div>
+              <p>
+                {{item.name}}
+              </p>
+            <div class="cont-price">
+              <p class="price">{{item.price |moneyFormat}}</p>
+              <p class="price old-price">{{item.origin_price | moneyFormat}}</p>
+            </div>
+          </div>
         </li>
       </ul>
     </div>
@@ -21,7 +21,7 @@
 
 <script>
 import BScroll from 'better-scroll'
-
+import {moneyFormat} from '@/filter'
 export default {
   name: 'scroll',
   props: {
@@ -88,7 +88,7 @@ export default {
       font-size: 12px;
       text-align: center;
       .cont-item {
-      position: relative;
+        position: relative;
         float: left;
         width: 90px;
         margin: 0 .1rem;

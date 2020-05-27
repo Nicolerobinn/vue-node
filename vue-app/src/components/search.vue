@@ -1,18 +1,18 @@
 /* eslint-disable */
 <template>
     <van-sticky :offset-top="0">
-  <div class="secarch-router">
-    <div class="secarch-input" @click="goTo">
-      <div class="input-text">
-        <van-icon name="search" /><span>{{placeholder}}</span></div>
-    </div>
-  </div>
+      <div class="secarch-router"  >
+        <div class="secarch-input" @click="goTo">
+          <div class="input-text">
+            <van-icon name="search" /><span>{{placeholder}}</span></div>
+        </div>
+      </div>
     </van-sticky>
 </template>
 <script>
   export default {
     name: "search",
-    props: [],
+    props: [ 'bgc' ],
     data() {
       return {
         placeholder: '快手菜'

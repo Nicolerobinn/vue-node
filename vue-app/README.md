@@ -64,3 +64,7 @@ npm install better-scroll --save
 
 # 引入瀑布流插件
  npm i vue-waterfall2@latest --save
+
+# 引入高德地图组件 vue-amap
+cnpm install vue-amap --save
+相关资料 https://www.jianshu.com/p/bde9526ad756

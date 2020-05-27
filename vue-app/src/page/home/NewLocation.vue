@@ -1,18 +1,13 @@
 /* eslint-disable */
 <template>
  <div>
-      <van-nav-bar
-      :title="title"
-      >
-      <template #left v-if="isBack"  >
-        <van-icon  @click="goTo" name="arrow-left" />
-      </template>
-    </van-nav-bar>
+    <nav-bar-back/>
     <address-edit/>
  </div>
 </template>
 <script>
   import { Toast } from 'vant';
+  import navBarBack from '@/components/navBarBack.vue'
   import addressEdit from '@/components/addressEdit.vue'
   export default {
     name: "NewLocation",
@@ -23,12 +18,10 @@
       };
     },
     components:{
-       addressEdit
+       addressEdit,
+       navBarBack
     },
     methods: {
-        goTo(){
-            this.$router.back(-1)
-        },
         onSave() {
           Toast('save');
         },

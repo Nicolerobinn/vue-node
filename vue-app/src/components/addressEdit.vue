@@ -1,7 +1,8 @@
 /* eslint-disable */
 <template>
     <van-form @submit="onSubmit">
-            <van-field v-model="text" label="联系人" />
+            <van-field v-model="text" label="联系人" 
+            placeholder="请填写姓名" />
             <van-field class="radio" name="radio" label="">
                 <template #input>
                     <van-radio-group v-model="radio" direction="horizontal">
@@ -28,16 +29,7 @@
             :maxlength="11"
             @blur="show = false"
             />
-            <van-field @click-input="goTo"   right-icon="arrow" v-model="digit"  label="收货地址" />
-            <!-- <div class="address" >
-                <div class="address-label" ><span>收货地址</span></div>
-                <div class="address-input-box" >
-                    <div class="address-input" ></div>
-                    <div class="address-icon" >
-                        <van-icon name="arrow" />
-                    </div>
-                </div>
-            </div> -->
+            <van-field @click-input="goTo"   right-icon="arrow" v-model="digit"  label="收货地址"   placeholder="请输选择收货地址" />
             <van-field
             v-model="number"
             placeholder="例：9号楼302室"
@@ -46,23 +38,24 @@
 
             <van-field name="radio" label="标签">
             <template #input>
-                <van-radio-group v-model="radio" direction="horizontal">
-                    <van-radio name="1"/>
-                    <van-radio name="2"/>
-                    <van-radio name="3"/>
-                </van-radio-group>
+                <div
+                class="active-tag"
+                :class="{active:tagActive == i}"
+                    v-for="(e,i) in tagArr"
+                    :key="i"
+                    @click="setAddress(e,i)"
+                >
+                {{e}}
+                </div>
             </template>
             </van-field>
-
-            <van-radio-group v-model="radio">
-                <van-cell-group>
-                        <van-cell title="设为默认地址" clickable @click="radio = '1'">
-                        <template #right-icon>
-                            <van-switch v-model="switchChecked" size="20" />
-                        </template>
-                        </van-cell>
-                </van-cell-group>
-            </van-radio-group>
+            <div class="address-button van-hairline--top-bottom" >
+              <div class="label" >
+                <p class="label-one" >设为默认地址</p>
+                <p class="label-two" >在启动app时将优先定位至默认地址,避免下单时候选择错误地址。</p>
+              </div>
+              <van-switch v-model="switchChecked" size="20" />
+            </div>
             <div class="submit-button" >
                 <van-button round block type="info" native-type="submit">
                     保存并使用
@@ -76,18 +69,23 @@
     name: "addressEdit",
     data() {
       return {
-      tel: '',
-      text: '',
-      digit: '',
-      number: '',
-      password: '',
-      radioAddress:'',
-      radio:'',
-      show: false,
-      switchChecked:false
+        tel: '',
+        text: '',
+        digit: '',
+        number: '',
+        password: '',
+        radioAddress:'',
+        radio:'',
+        show: false,
+        switchChecked:false,
+        tagArr:['家','公司','父母家'],
+        tagActive:0
       };
     },
     methods: {
+        setAddress(str,ind){
+          this.tagActive = ind
+        },
         goTo(){
           this.$router.push('map')
         },
@@ -102,6 +100,23 @@
 </script>
 
 <style lang="scss" scoped>
+$color : #1AC694;
+.address-button{
+   padding: 10px 16px;
+   display: flex;
+align-items: center;
+   .label{
+       flex: 1;
+       .label-one{
+           font-size: 14px;
+           margin-bottom: 4px;
+       }
+       .label-two{
+           font-size: 10px;
+           color: gray;
+       }
+   }
+}
 .address{
     position: relative;
     padding: 10px 16px;
@@ -135,10 +150,31 @@
         width: 90px;
     }
 }
+.active-tag{
+    padding: 0 10px;
+    font-size: 10px;
+    border: 1px solid  hsl(216, 14%, 93%);
+    margin-right: 12px;
+    border-radius: 10px;
+}
+.active-tag.active{
+    border: 1px solid  $color;
+    color: $color;
+}
 .radio{
     padding-left:105px ;
 }
 .submit-button{
     margin: 16px 16px 0px;
+}
+/deep/ .van-radio__icon--checked .van-icon , .van-button--info{
+    background-color: $color;
+    border-color: $color;
+}
+.van-switch--on{
+   background-color: $color;
+}
+.van-switch{
+    
 }
 </style>
