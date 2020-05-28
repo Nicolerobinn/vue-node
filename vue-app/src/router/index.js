@@ -97,7 +97,7 @@ const router = new Router({
         {
           path: "location",
           name: "location",
-          meta: { isBack: true, keepAlive: true, title: "选择收货地址" , isTabShow:false },
+          meta: { isBack: true, title: "选择收货地址" , isTabShow:false },
           component: Location
         },
           {

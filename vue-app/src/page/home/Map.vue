@@ -15,8 +15,7 @@
 <script>
 import mapV from './components/map/mapV'
 import mapList from './components/map/mapList'
-import PubSub from 'pubsub-js'
-import { EDIT_ADDRESS } from '@/utils/pubsub_type'
+import { mapMutations } from 'vuex'
   export default {
     name: "Map",
     data() {
@@ -31,9 +30,9 @@ import { EDIT_ADDRESS } from '@/utils/pubsub_type'
       mapV
     },
     methods: {
+    ...mapMutations(['SET_EDIT_ADDRESS']),
       callBackMapList(e){
-        PubSub.publish(EDIT_ADDRESS, e.name);
-        console.log(EDIT_ADDRESS, e.name)
+        this.SET_EDIT_ADDRESS(e.name)
         this.$router.back()
       },
       callBackSetMapList(arr){
@@ -60,8 +59,7 @@ import { EDIT_ADDRESS } from '@/utils/pubsub_type'
 </script>
 
 <style lang="scss" scoped>
-.van-cell-group{
-  height: 100%;
-}
-
+  >>>.adrs{
+    max-height: 500px;
+  }
 </style>

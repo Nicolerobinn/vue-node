@@ -1,23 +1,23 @@
 /* eslint-disable */
 <template>
-    <van-form @submit="onSubmit">
-            <van-field v-model="text" label="联系人" 
-            placeholder="请填写姓名" />
-            <van-field class="radio" name="radio" label="">
+    <van-form @submit="onSubmit" :validate-first="true">
+            <van-field v-model="name" label="联系人" placeholder="请填写姓名" name="name" :rules="[{ name, message: '请输入正确内容',required:true }]" />
+            <van-field class="radio"    name="radio" :rules="[{ radio, message: '请选择内容' }]" >
                 <template #input>
                     <van-radio-group v-model="radio" direction="horizontal">
-                        <van-radio name="1">先生</van-radio>
-                        <van-radio name="2">女士</van-radio>
+                        <van-radio :name="1">先生</van-radio>
+                        <van-radio :name="2">女士</van-radio>
                     </van-radio-group>
                 </template>
             </van-field>
             <van-field
-            readonly
-            clickable
-            :value="tel"
-            placeholder="请输入手机号"
-            label="手机号"
-            @touchstart.native.stop="show = true"
+                readonly
+                clickable
+                v-model="tel"
+                placeholder="请输入手机号"
+                label="手机号"
+                name="tel"
+                @touchstart.native.stop="show = true" :rules="[{ tel,parttetn:true, message: '请输入手机号',required:true }]"
             >
                 <template v-if="tel!==''" #button>
                     <van-icon @click="clear" name="clear" />
@@ -29,25 +29,20 @@
             :maxlength="11"
             @blur="show = false"
             />
-            <van-field @click-input="goTo"   right-icon="arrow" v-model="local"  label="收货地址"   placeholder="请输选择收货地址" />
-            <van-field
-            v-model="number"
-            placeholder="例：9号楼302室"
-            label="门牌号" />
-
-
-            <van-field name="radio" label="标签">
-            <template #input>
-                <div
-                class="active-tag"
-                :class="{active:tagActive == i}"
-                    v-for="(e,i) in tagArr"
-                    :key="i"
-                    @click="setAddress(e,i)"
-                >
-                {{e}}
-                </div>
-            </template>
+            <van-field @click-input="goTo"   right-icon="arrow" v-model="address"  label="收货地址"   placeholder="请输选择收货地址" name="address" :rules="[{ address, message: '请选择地址' }]" />
+            <van-field v-model="house"  placeholder="例：9号楼302室" label="门牌号" name="house" :rules="[{ tel,parttetn:true, message: '请选择地址',required:true }]"  />
+            <van-field name="tag" label="标签"  >
+                <template #input>
+                    <div
+                    class="active-tag"
+                    :class="{active:tagActive == i}"
+                        v-for="(e,i) in tagArr"
+                        :key="i"
+                        @click="setAddress(e,i)"
+                    >
+                    {{e}}
+                    </div>
+                </template>
             </van-field>
             <div class="address-button van-hairline--top-bottom" >
               <div class="label" >
@@ -66,39 +61,25 @@
 <script>
   import { Toast } from 'vant';
   import { mapState, mapMutations } from 'vuex'
-  import { EDIT_ADDRESS } from '@/utils/pubsub_type'
-  import PubSub from 'pubsub-js'
   export default {
     name: "addressEdit",
     data() {
       return {
-        tel: '',
-        text: '',
-        number: '',
-        password: '',
-        radioAddress:'',
-        radio:'',
-        show: false,
-        switchChecked:false,
-        tagArr:['家','公司','父母家'],
-        tagActive:0,
-        local:'',
-        subscribe: null
+          name:'',
+          tel: '',
+          house:'',
+          radio:'',
+          show: false,
+          switchChecked:false,
+          tagArr:['家','公司','父母家'],
+          tagActive:0
       };
     },
-    mounted(){
-        this.subscribe = PubSub.subscribe(EDIT_ADDRESS, (msg, data) => {
-        console.log(EDIT_ADDRESS, data)
-            if (msg == EDIT_ADDRESS) {
-                this.local = data;
-            }
-        })
-    },
-    beforeDestroy () {
-        // 销毁订阅
-        PubSub.unsubscribe(this.subscribe );
+    created(){
+
     },
     methods: {
+        ...mapMutations(['ADD_USER_SHOPPING_ADDRESS']),
         setAddress(str,ind){
           this.tagActive = ind
         },
@@ -108,10 +89,15 @@
         clear(){
             this.tel=""
         },
-        onSubmit(values) {
-        console.log('submit', values);
+        onSubmit(e) {
+            e.tag = this.tagArr[this.tagActive]
+        //    this.ADD_USER_SHOPPING_ADDRESS()
+        //    this.$router.back()
         },
     },
+    computed:{
+    ...mapState(['address'])
+    }
   };
 </script>
 
@@ -120,7 +106,7 @@ $color : #1AC694;
 .address-button{
    padding: 10px 16px;
    display: flex;
-align-items: center;
+   align-items: center;
    .label{
        flex: 1;
        .label-one{

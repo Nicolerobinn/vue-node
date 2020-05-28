@@ -190,7 +190,6 @@ export default {
     },
     watch: {
       list(val, oldVal){
-        console.log(val)
           this.$emit('callBackSetMapList',val);
       },
     },
@@ -209,52 +208,6 @@ $height :176px;
   height: 100%;
   z-index: 200;
   background-color: #f5f5f5;
-  .adrs {
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-    height: calc(100vh);
-    .title {
-      color: black;
-      font-size: 10px;
-      font-family: SourceHanSansCN-Bold;
-      span{
-        color:#3bba63 ;
-      }
-    }
-    .subTitle {
-      color: grey;
-      font-size:10px;
-    }
-    .nearLists {
-      padding: 8px;
-      line-height: 16px;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      position: relative;
-      border: none;
-      width: 100%;
-        &:after {
-          left: 0;
-          content: "";
-          position: absolute;
-          bottom: 0;
-          background: rgba(9, 20, 31, 1);
-          width: 100%;
-          height: 1px;
-          -webkit-transform: scaleY(0.2);
-          transform: scaleY(0.2);
-          -webkit-transform-origin: 0 0;
-          transform-origin: 0 0;
-        }
-    }
-    ul li.active {
-      color: deeppink;
-    }
-  }
   .amap-page-container {
     margin-top: 10px;
     height: $height;

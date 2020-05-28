@@ -2,6 +2,8 @@
 <template>
       <van-nav-bar
     :title="title"
+     fixed
+     placeholder
       >
       <template #left   >
         <van-icon  @click="goTo" name="arrow-left" />

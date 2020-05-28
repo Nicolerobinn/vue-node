@@ -9,13 +9,13 @@
                 placeholder
                 >
       <van-tabbar-item
-                       v-for="(item,index) in tabbars"
-                       :key="index"
-                       :id="index==3?'buycar':''"
-                       @click="tab(index,item.name)"
-                       :info="item.name=='cart'?goodsNum:''"
-                       :icon="item.icon"
-                       replace
+                v-for="(item,index) in tabbars"
+                :key="index"
+                :id="index==3?'buycar':''"
+                @click="tab(index,item.name)"
+                :info="item.name=='cart'?goodsNum:''"
+                :icon="item.icon"
+                replace
        >
         <span :class="currIndex == index ? active:''">{{item.title}}</span>
        </van-tabbar-item>

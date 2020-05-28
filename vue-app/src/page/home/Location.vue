@@ -5,6 +5,8 @@
       :title="title"
       right-text="新增地址"
       @click-right="onClickRight"
+      placeholder
+      fixed
       >
         <template #left v-if="isBack"  >
           <van-icon  @click="goTo" name="arrow-left" />
@@ -20,6 +22,7 @@ import mapList from './components/map/mapList'
 import { LOCAL_ADDRESS } from '@/utils/pubsub_type'
 import {setLocalStore} from '@/utils/common'
 import PubSub from 'pubsub-js'
+  import { mapState, mapMutations } from 'vuex'
   export default {
     name: "Location",
     data() {
@@ -29,11 +32,16 @@ import PubSub from 'pubsub-js'
         list:[]
       };
     },
+    computed: {
+
+      ...mapState(['shippingAddress']),
+    },
     components:{
       mapList,
       mapV
     },
     methods: {
+      ...mapMutations(['INIT_USER_SHOPPING_ADDRESS']),
       callBackMapList(e){
         PubSub.publish(LOCAL_ADDRESS, e.name);
         setLocalStore('local',e.name)
@@ -41,7 +49,6 @@ import PubSub from 'pubsub-js'
       },
       callBackSetMapList(arr){
         this.list = arr
-        console.log(arr)
       },
       goTo(){
         this.$router.back(-1)
@@ -52,6 +59,7 @@ import PubSub from 'pubsub-js'
       },
     },
     mounted() {
+      this.INIT_USER_SHOPPING_ADDRESS();
       this.isBack = this.$route.meta.isBack;
       this.title = this.$route.meta.title;
     },
@@ -72,5 +80,8 @@ import PubSub from 'pubsub-js'
   }
   /deep/ .van-nav-bar__text{
     color: $color!important;
+  }
+  >>>.adrs{
+    max-height:700px;
   }
 </style>

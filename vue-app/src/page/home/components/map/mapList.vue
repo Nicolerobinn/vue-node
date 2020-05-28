@@ -1,12 +1,9 @@
 /* eslint-disable */
 <template>
-  <div>
     <!-- 地址列表 -->
     <div class="adrs" ref="wrapper">
-      <ul v-if="list.length > 0">
-        <van-cell-group>
-          <ul>
-            <li class="nearLists"
+          <ul v-if="list.length > 0"  ref="cont">
+            <li  ref="item" class="nearLists"
                 v-for="(item,index) in list"
                 :key="index"
                 @click="clickAddredd(item)">
@@ -14,10 +11,7 @@
                 <p class="subTitle">{{item.address}}</p>
             </li>
           </ul>
-        </van-cell-group>
-      </ul>
     </div>
-  </div>
 </template>
 <script>
 import BScroll from 'better-scroll'
@@ -29,19 +23,17 @@ export default {
   },
   components: {},
   methods: {
-      clickAddredd(item){
-          this.$emit('callBackMapList',item)
-      },
-        render(){
-            let that = this
-            this.$nextTick(() => {
-                setTimeout(() => {
-                that.verScroll()
-            }, 0)
-            })
+        clickAddredd(item){
+            this.$emit('callBackMapList',item)
         },
         verScroll () {
           this.$nextTick(() => {
+            let wiperHeight = 0;
+            let el = this.$refs.item;
+            for (let i = 0; i < el.length; i++) {
+              wiperHeight += el[i].clientHight;
+            }
+            this.$refs.cont.style.height = wiperHeight + 'px'  // 修改滚动区域的宽度
             if (!this.scroll) {
               this.scroll = new BScroll(this.$refs.wrapper, {
                 startY: 0,  // 配置的详细信息请参考better-scroll的官方文档，这里不再赘述
@@ -54,6 +46,14 @@ export default {
             }
           })
         },
+        render(){
+            let that = this
+            this.$nextTick(() => {
+                setTimeout(() => {
+                that.verScroll()
+            }, 0)
+            })
+        },
   },
     watch: {
       list(val, oldVal){
@@ -64,13 +64,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .adrs {
+  .adrs { touch-action: none;
     width: 100%;
-    height: 100%;
+    box-sizing: border-box;
     overflow: hidden;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-    height: calc(100vh);
     .title {
       color: black;
       font-size: 10px;
@@ -91,7 +88,6 @@ export default {
       justify-content: flex-start;
       position: relative;
       border: none;
-      width: 100%;
         &:after {
           left: 0;
           content: "";
