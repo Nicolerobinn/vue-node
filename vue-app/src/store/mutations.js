@@ -15,7 +15,8 @@ import {
     INIT_USER_SHOPPING_ADDRESS,
     ADD_USER_SHOPPING_ADDRESS,
     DELETE_USER_SHOPPING_ADDRESS,
-    CHANGE_USER_SHOPPING_ADDRESS
+    CHANGE_USER_SHOPPING_ADDRESS,
+    SET_EDIT_ADDRESS
 } from './mutation-type'
 import Vue from 'vue'
 
@@ -310,5 +311,9 @@ export default {
             // 1.4 如何没有登录跳转到登录界面
             router.push('/login');
         }
+    },
+    //map地址传递
+    [SET_EDIT_ADDRESS](state, goods) {
+        state.address = goods
     }
 }

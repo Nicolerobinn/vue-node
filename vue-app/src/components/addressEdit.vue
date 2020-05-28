@@ -29,7 +29,7 @@
             :maxlength="11"
             @blur="show = false"
             />
-            <van-field @click-input="goTo"   right-icon="arrow" v-model="digit"  label="收货地址"   placeholder="请输选择收货地址" />
+            <van-field @click-input="goTo"   right-icon="arrow" v-model="local"  label="收货地址"   placeholder="请输选择收货地址" />
             <van-field
             v-model="number"
             placeholder="例：9号楼302室"
@@ -65,13 +65,15 @@
 </template>
 <script>
   import { Toast } from 'vant';
+  import { mapState, mapMutations } from 'vuex'
+  import { EDIT_ADDRESS } from '@/utils/pubsub_type'
+  import PubSub from 'pubsub-js'
   export default {
     name: "addressEdit",
     data() {
       return {
         tel: '',
         text: '',
-        digit: '',
         number: '',
         password: '',
         radioAddress:'',
@@ -79,8 +81,22 @@
         show: false,
         switchChecked:false,
         tagArr:['家','公司','父母家'],
-        tagActive:0
+        tagActive:0,
+        local:'',
+        subscribe: null
       };
+    },
+    mounted(){
+        this.subscribe = PubSub.subscribe(EDIT_ADDRESS, (msg, data) => {
+        console.log(EDIT_ADDRESS, data)
+            if (msg == EDIT_ADDRESS) {
+                this.local = data;
+            }
+        })
+    },
+    beforeDestroy () {
+        // 销毁订阅
+        PubSub.unsubscribe(this.subscribe );
     },
     methods: {
         setAddress(str,ind){

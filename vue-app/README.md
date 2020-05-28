@@ -68,3 +68,7 @@ npm install better-scroll --save
 # 引入高德地图组件 vue-amap
 cnpm install vue-amap --save
 相关资料 https://www.jianshu.com/p/bde9526ad756
+
+# 对于兄弟组件之间传值使用vuex感觉不方便，就引入PubSub.js
+npm install pubsub-js --save
+在utils工具文件夹下创建 用于发布订阅的线类名，如果需要使用就在当前页面引入就可以，很方便

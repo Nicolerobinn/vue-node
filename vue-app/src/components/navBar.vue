@@ -4,7 +4,7 @@
     <van-nav-bar @click-right="onClickRight">
       <template #left v-if="isLocaltion">
         <van-icon @click="goTo" name="location" />
-        <span @click="goTo" class="location">1123311111111111333231232</span>
+        <span @click="goTo" class="location">{{local  ||'请选择位置信息'}}</span>
       </template>
       <template #right>
         <van-icon name="chat-o" />
@@ -14,15 +14,24 @@
 </template>
 <script>
 import { Toast } from "vant";
+import {getLocalStore} from '@/utils/common'
+import { LOCAL_ADDRESS } from '@/utils/pubsub_type'
+import PubSub from 'pubsub-js'
 export default {
   name: "navBar",
   props: [],
   data() {
     return {
-      isLocaltion: false
+      isLocaltion: false,
+      local:getLocalStore('local')
     };
   },
   mounted() {
+    PubSub.subscribe(LOCAL_ADDRESS, (msg, data) => {
+      if (msg == LOCAL_ADDRESS) {
+        this.local = data;
+      }
+    })
     this.isLocaltion = this.$route.meta.isLocaltion;
   },
   watch: {
@@ -30,6 +39,9 @@ export default {
       this.isLocaltion = to.meta.isLocaltion;
     }
   },
+    beforeDestroy () {
+      PubSub.unsubscribe(this.subscribe)//销毁订阅
+    },
   methods: {
     goTo() {
       this.$router.push("location");

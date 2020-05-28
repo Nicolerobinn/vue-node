@@ -1,7 +1,7 @@
 <template>
     <div class="scroll" ref="wrapper">
       <ul class="cont" ref="cont">
-        <li class="cont-item" v-for="item of arr" :key="item.id">
+        <li ref="item" class="cont-item" v-for="item of arr" :key="item.id">
           <div class="cont-img">
               <img class="img" :src="item.small_image" >
             </div>
@@ -40,10 +40,13 @@ export default {
   },
   methods: {
     verScroll () {
-      let width = this.arr.length * 97// 动态计算出滚动区域的大小，前面已经说过了，产生滚动的原因是滚动区域宽度大于父盒子宽度
-
-      this.$refs.cont.style.width = width + 'px'  // 修改滚动区域的宽度
       this.$nextTick(() => {
+        let wiperWidth = 0;
+        let el = this.$refs.item;
+        for (let i = 0; i < el.length; i++) {
+          wiperWidth += el[i].clientWidth;
+        }
+        this.$refs.cont.style.width = wiperWidth + 'px'  // 修改滚动区域的宽度
         if (!this.scroll) {
           this.scroll = new BScroll(this.$refs.wrapper, {
             startX: 0,  // 配置的详细信息请参考better-scroll的官方文档，这里不再赘述

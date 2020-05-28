@@ -48,6 +48,7 @@
     "postcss-url": "^7.2.1",
     "rimraf": "^2.6.0",
     "sass-loader": "^7.3.1",
+    "pubsub-js": "^1.7.0",
     "semver": "^5.3.0",
     "shelljs": "^0.7.6",
     "swiper": "^5.4.1",

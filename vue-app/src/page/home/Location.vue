@@ -1,32 +1,55 @@
 /* eslint-disable */
 <template>
-    <van-nav-bar
-    :title="title"
-    right-text="新增地址"
-    @click-right="onClickRight"
-    >
-      <template #left v-if="isBack"  >
-        <van-icon  @click="goTo" name="arrow-left" />
-      </template>
-    </van-nav-bar>
+  <div>
+        <van-nav-bar
+      :title="title"
+      right-text="新增地址"
+      @click-right="onClickRight"
+      >
+        <template #left v-if="isBack"  >
+          <van-icon  @click="goTo" name="arrow-left" />
+        </template>
+      </van-nav-bar>
+      <map-v @callBackSetMapList="callBackSetMapList" :show="false"  />
+      <map-list :list="list" @callBackMapList="callBackMapList" />
+  </div>
 </template>
 <script>
+import mapV from './components/map/mapV'
+import mapList from './components/map/mapList'
+import { LOCAL_ADDRESS } from '@/utils/pubsub_type'
+import {setLocalStore} from '@/utils/common'
+import PubSub from 'pubsub-js'
   export default {
     name: "Location",
     data() {
       return {
         title:'',
-        isBack:false
+        isBack:false,
+        list:[]
       };
     },
+    components:{
+      mapList,
+      mapV
+    },
     methods: {
-        goTo(){
-            this.$router.back(-1)
-        },
-        onClickRight(){
-            this.$router.push('newlocation')
+      callBackMapList(e){
+        PubSub.publish(LOCAL_ADDRESS, e.name);
+        setLocalStore('local',e.name)
+        this.$router.back()
+      },
+      callBackSetMapList(arr){
+        this.list = arr
+        console.log(arr)
+      },
+      goTo(){
+        this.$router.back(-1)
+      },
+      onClickRight(){
+        this.$router.push('newlocation')
 
-        },
+      },
     },
     mounted() {
       this.isBack = this.$route.meta.isBack;
