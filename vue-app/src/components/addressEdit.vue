@@ -113,6 +113,7 @@ export default {
     onSubmit(e) {
       e.tag = this.tagArr[this.tagActive];
       e.switchChecked = this.switchChecked;
+      e.isChecked = false;
       if (e.name.trim() == "") {
         Toast("请填写姓名");
         return;

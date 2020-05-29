@@ -4,14 +4,15 @@
   <div class="adrs" ref="wrapper">
     <ul  ref="cont">
         <template  v-if="localList.length > 0">
-            <li ref="localItem" class="nearLists"  @click="clickAddredd(item)" v-for="(item,index) in localList" :key="index">
+            <li ref="localItem" class="nearLists position"  @click="checkAddress(item)" v-for="(item,index) in localList" :key="index">
                 <div class="title">
-                   <div> {{item.address}}</div>  <div class="tag" > {{item.tag}} </div>  <div v-if="item.switchChecked" class="checked" >默认</div>
+                  <div> {{item.address}}</div>  <div class="tag" > {{item.tag}} </div>  <div v-if="item.switchChecked" class="checked" >默认</div>
                 </div>
                 <p class="house">
                     {{item.house}}
                 </p>
                 <p class="subTitle">{{item.name}}{{item.radio}} {{item.tel}}</p>
+                <van-icon  v-if="item.isChecked"  name="success" />
             </li>
         </template>
         <template v-if="list.length > 0" >
@@ -28,6 +29,7 @@
 </template>
 <script>
 import BScroll from "better-scroll";
+import { mapState, mapMutations } from "vuex";
 export default {
   name: "mapLocalList",
   props: {
@@ -50,36 +52,43 @@ export default {
   },
   components: {},
   methods: {
+    ...mapMutations(["CHICKED_USER_ADDRESS"]),
+    checkAddress(item){
+      this.CHICKED_USER_ADDRESS(item);
+      this.$emit("callBackMapList", item);
+    },
     clickAddredd(item) {
       this.$emit("callBackMapList", item);
     },
     verScroll() {
-      this.$nextTick(() => {
-        let wiperHeight = 0;
-        let el = this.$refs.item;
-            if(this.list.length>0){
-            for (let i = 0; i < el.length; i++) {
-            wiperHeight += el[i].clientHight;
+        if(this.$refs.cont){
+          this.$nextTick(() => {
+            let wiperHeight = 0;
+            let el = this.$refs.item;
+                if(this.list.length>0){
+                for (let i = 0; i < el.length; i++) {
+                wiperHeight += el[i].clientHight;
+                }
             }
-        }
-        if(this.localList.length>0){
-            let al = this.$refs.localItem;
-            for (let a = 0; a < al.length; a++) {
-               wiperHeight += al[a].clientHight;
+            if(this.localList.length>0){
+                let al = this.$refs.localItem;
+                for (let a = 0; a < al.length; a++) {
+                  wiperHeight += al[a].clientHight;
+                }
             }
-        }
-        this.$refs.cont.style.height = wiperHeight + "px"; // 修改滚动区域的宽度
-        if (!this.scroll) {
-          this.scroll = new BScroll(this.$refs.wrapper, {
-            startY: 0, // 配置的详细信息请参考better-scroll的官方文档，这里不再赘述
-            click: true,
-            scrollY: true,
-            eventPassthrough: "horizontal"
+            this.$refs.cont.style.height = wiperHeight + "px"; // 修改滚动区域的宽度
+            if (!this.scroll) {
+              this.scroll = new BScroll(this.$refs.wrapper, {
+                startY: 0, // 配置的详细信息请参考better-scroll的官方文档，这里不再赘述
+                click: true,
+                scrollY: true,
+                eventPassthrough: "horizontal"
+              });
+            } else {
+              this.scroll.refresh(); //如果dom结构发生改变调用该方法
+            }
           });
-        } else {
-          this.scroll.refresh(); //如果dom结构发生改变调用该方法
         }
-      });
     },
     render() {
       let that = this;
@@ -92,7 +101,9 @@ export default {
   },
   watch: {
     list(val, oldVal) {
-      this.render();
+        if(this.$refs.cont){
+          this.render();
+        }
     },
     localList(val,oldVal){
         if(this.$refs.cont){
@@ -107,6 +118,17 @@ export default {
 $color:#3bba63;
 $fontBlod: SourceHanSansCN-Bold;
 $fontRegular: SourceHanSansCN-Regular;
+.position{
+  position: relative;
+   .van-icon{
+     font-size: 16px;
+     position: absolute;
+     right: 10px;
+     top: 50%;
+     color: #3bba63;
+     transform: translateY(-50%);
+   }
+}
 .adrs {
   touch-action: none;
   width: 100%;

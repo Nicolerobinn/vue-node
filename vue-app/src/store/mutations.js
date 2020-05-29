@@ -16,7 +16,8 @@ import {
   ADD_USER_SHOPPING_ADDRESS,
   DELETE_USER_SHOPPING_ADDRESS,
   CHANGE_USER_SHOPPING_ADDRESS,
-  SET_EDIT_ADDRESS
+  SET_EDIT_ADDRESS,
+  CHICKED_USER_ADDRESS
 } from "./mutation-type";
 import Vue from "vue";
 
@@ -237,7 +238,13 @@ export default {
   // 17.增加用户地址
   [ADD_USER_SHOPPING_ADDRESS](state, content) {
     // 17.1 添加用户地址
-    state.shippingAddress = [...state.shippingAddress, content];
+    let addressArr = [ ...state.shippingAddress]
+    if(content.switchChecked){
+      addressArr.forEach(e => {
+        e.switchChecked = false
+      });
+    }
+    state.shippingAddress = [...addressArr, content];
     // 17.2 将数据存储到本地
     setLocalStore("shippingAddress", state.shippingAddress);
   },
@@ -284,8 +291,22 @@ export default {
       router.push("/login");
     }
   },
-  //map地址传递
+  // 22.map地址传递
   [SET_EDIT_ADDRESS](state, goods) {
     state.address = goods;
-  }
+  },
+  // 21.修改用户地址状态
+  [CHICKED_USER_ADDRESS](state, content) {
+    let addressArr = [ ...state.shippingAddress]
+      addressArr.forEach(e => {
+        if(e==content){
+          e.isChecked = true
+        }else{
+          e.isChecked = false
+        }
+      });
+    state.shippingAddress = [...addressArr];
+    // 17.2 将数据存储到本地
+    setLocalStore("shippingAddress", state.shippingAddress);
+  },
 };
