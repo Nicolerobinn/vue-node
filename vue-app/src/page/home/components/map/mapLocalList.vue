@@ -2,40 +2,42 @@
 <template>
   <!-- 地址列表 -->
   <div class="adrs" ref="wrapper">
-    <ul v-if="compList.length > 0" ref="cont">
-      <li ref="item" class="nearLists" v-for="(item,index) in compList" :key="index">
-        <div v-if="item.tag" @click="clickAddredd(item)">
-          <p class="title">{{item.address}}</p>
-          <p class="house">{{item.house}}</p>
-          <p class="subTitle">{{item.name}}{{item.tel}}</p>
-        </div>
-        <div v-else @click="clickAddredd(item)">
-          <p class="title">
-            <span v-if="index-addressList.length==0">[当前]</span>
-            {{item.name}}
-          </p>
-          <p class="subTitle">{{item.address}}</p>
-        </div>
-      </li>
+    <ul  ref="cont">
+        <template  v-if="localList.length > 0">
+            <li ref="localItem" class="nearLists"  @click="clickAddredd(item)" v-for="(item,index) in localList" :key="index">
+                <div class="title">
+                   <div> {{item.address}}</div>  <div class="tag" > {{item.tag}} </div>  <div v-if="item.switchChecked" class="checked" >默认</div>
+                </div>
+                <p class="house">
+                    {{item.house}}
+                </p>
+                <p class="subTitle">{{item.name}}{{item.radio}} {{item.tel}}</p>
+            </li>
+        </template>
+        <template v-if="list.length > 0" >
+            <li ref="item" class="nearLists"  @click="clickAddredd(item)" v-for="(item,index) in list" :key="'nearLists'+index">
+                <p class="title">
+                    <span v-if="index==0">[当前]</span>
+                    {{item.name}}
+                </p>
+                <p class="subTitle">{{item.address}}</p>
+            </li>
+        </template>
     </ul>
   </div>
 </template>
 <script>
 import BScroll from "better-scroll";
 export default {
-  name: "mapList",
+  name: "mapLocalList",
   props: {
-    list: {
+    list:{
       type: Array,
       default: function() {
         return [];
       }
     },
-    isAddressList: {
-      type: Boolean,
-      default: false
-    },
-    addressList: {
+    localList:{
       type: Array,
       default: function() {
         return [];
@@ -44,7 +46,6 @@ export default {
   },
   data() {
     return {
-      compList: []
     };
   },
   components: {},
@@ -56,8 +57,16 @@ export default {
       this.$nextTick(() => {
         let wiperHeight = 0;
         let el = this.$refs.item;
-        for (let i = 0; i < el.length; i++) {
-          wiperHeight += el[i].clientHight;
+            if(this.list.length>0){
+            for (let i = 0; i < el.length; i++) {
+            wiperHeight += el[i].clientHight;
+            }
+        }
+        if(this.localList.length>0){
+            let al = this.$refs.localItem;
+            for (let a = 0; a < al.length; a++) {
+               wiperHeight += al[a].clientHight;
+            }
         }
         this.$refs.cont.style.height = wiperHeight + "px"; // 修改滚动区域的宽度
         if (!this.scroll) {
@@ -83,18 +92,21 @@ export default {
   },
   watch: {
     list(val, oldVal) {
-      this.compList = [...this.addressList, ...this.list];
       this.render();
     },
-    addressList(val, oldVal) {
-      this.compList = [...val, ...this.list];
-      this.render();
+    localList(val,oldVal){
+        if(this.$refs.cont){
+          this.render();
+        }
     }
   }
 };
 </script>
 
 <style lang="scss" scoped>
+$color:#3bba63;
+$fontBlod: SourceHanSansCN-Bold;
+$fontRegular: SourceHanSansCN-Regular;
 .adrs {
   touch-action: none;
   width: 100%;
@@ -103,9 +115,23 @@ export default {
   .title {
     color: black;
     font-size: 10px;
-    font-family: SourceHanSansCN-Bold;
+    font-family: $fontBlod;
     span {
-      color: #3bba63;
+      color: $color;
+    }
+    div{
+        float: left;
+        font-size: 10px;
+        font-family: $fontBlod;
+        padding: 3px;
+        &.tag{
+            color: $color;
+            font-family: $fontRegular;
+        }
+        &.checked{
+            font-family: $fontRegular;
+            color: #c8864ae6;
+        }
     }
   }
   .subTitle {
@@ -133,9 +159,6 @@ export default {
       -webkit-transform-origin: 0 0;
       transform-origin: 0 0;
     }
-  }
-  ul li.active {
-    color: deeppink;
   }
 }
 </style>

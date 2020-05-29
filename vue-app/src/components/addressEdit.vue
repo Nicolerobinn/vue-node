@@ -14,8 +14,8 @@
     >
       <template #input>
         <van-radio-group v-model="radio" direction="horizontal">
-          <van-radio name="男">先生</van-radio>
-          <van-radio name="女">女士</van-radio>
+          <van-radio name="先生">先生</van-radio>
+          <van-radio name="女士">女士</van-radio>
         </van-radio-group>
       </template>
     </van-field>

@@ -9,12 +9,15 @@
       </template>
     </van-nav-bar>
     <map-v @callBackSetMapList="callBackSetMapList"  />
-    <map-list :list="list" @callBackMapList="callBackMapList" />
+    <map-local-list
+      :list="list"
+      @callBackMapList="callBackMapList"
+    />
  </div>
 </template>
 <script>
 import mapV from './components/map/mapV'
-import mapList from './components/map/mapList'
+import mapLocalList from "./components/map/mapLocalList";
 import { mapMutations } from 'vuex'
   export default {
     name: "Map",
@@ -26,7 +29,7 @@ import { mapMutations } from 'vuex'
       };
     },
     components:{
-      mapList,
+      mapLocalList,
       mapV
     },
     methods: {

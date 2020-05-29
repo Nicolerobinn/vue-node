@@ -7,17 +7,16 @@
       </template>
     </van-nav-bar>
     <map-v @callBackSetMapList="callBackSetMapList" :show="false" />
-    <map-list
-      :isAddressList="true"
-      :addressList="shippingAddress"
+    <map-local-list
       :list="list"
+      :localList="shippingAddress"
       @callBackMapList="callBackMapList"
     />
   </div>
 </template>
 <script>
 import mapV from "./components/map/mapV";
-import mapList from "./components/map/mapList";
+import mapLocalList from "./components/map/mapLocalList";
 import { LOCAL_ADDRESS } from "@/utils/pubsub_type";
 import { setLocalStore } from "@/utils/common";
 import PubSub from "pubsub-js";
@@ -28,16 +27,15 @@ export default {
     return {
       title: "",
       isBack: false,
-      list: [],
-      chosenAddressId: "1"
+      list: []
     };
   },
   computed: {
     ...mapState(["shippingAddress"])
   },
   components: {
-    mapList,
-    mapV
+    mapV,
+    mapLocalList
   },
   methods: {
     ...mapMutations(["INIT_USER_SHOPPING_ADDRESS"]),
