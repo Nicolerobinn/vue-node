@@ -270,26 +270,18 @@ export default {
   },
   // 添加商品进购物车
   [ADD_TO_CART](state, goods) {
-    // 判断是否有用户登录
-    if (state.userInfo.token) {
-      // 1.3 添加数据
-      // 延迟900毫秒等待动画结束
-      setTimeout(() => {
-        this.commit("ADD_GOODS", {
-          goodsID: goods.id,
-          goodsName: goods.name,
-          smallImage: goods.small_image,
-          goodsPrice: goods.price
-        });
-        Toast({
-          message: "成功加入购物车",
-          duration: 800
-        });
-      }, 900);
-    } else {
-      // 1.4 如何没有登录跳转到登录界面
-      router.push("/login");
-    }
+    setTimeout(() => {
+      this.commit("ADD_GOODS", {
+        goodsID: goods.id,
+        goodsName: goods.name,
+        smallImage: goods.small_image,
+        goodsPrice: goods.price
+      });
+      Toast({
+        message: "成功加入购物车",
+        duration: 800
+      });
+    }, 900);
   },
   // 22.map地址传递
   [SET_EDIT_ADDRESS](state, goods) {

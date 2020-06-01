@@ -11,7 +11,7 @@
       <van-tabbar-item
                 v-for="(item,index) in tabbars"
                 :key="index"
-                :id="index==3?'buycar':''"
+                :id="index==2?'buycar':''"
                 @click="tab(index,item.name)"
                 :info="item.name=='cart'?goodsNum:''"
                 :icon="item.icon"
