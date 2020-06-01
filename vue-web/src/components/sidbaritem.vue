@@ -29,14 +29,22 @@
   </el-submenu>
 
 </div>
+<div v-else>
+  <template>
+    <el-menu-item :index="item.path">
+      <i class="el-icon-document"></i>
+      <span slot="title">{{item.name}}</span>
+    </el-menu-item>
+  </template>
 
+</div>
 
 </template>
 
 <script>
 
 export default {
-  name: 'sidebartem',
+  name: 'sidbarItem',
   props: {
     item: {
       type: Object,

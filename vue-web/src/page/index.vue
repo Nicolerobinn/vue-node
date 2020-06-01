@@ -2,10 +2,10 @@
 <template>
   <div id="box" >
     <el-row  style="height: 100%; ">
-        <el-col :span="4"   style="min-height: 100%; background-color: #324057;">
+        <el-col :span="5"   style="min-height: 100%; background-color: #324057;">
           <SidBar/>
         </el-col>
-        <el-col :span="20"  style="height: 100%;overflow: auto;" >
+        <el-col :span="19"  style="height: 100%;overflow: auto;" >
           <div class="content">
               <transition name="move" mode="out-in">
                   <keep-alive>
