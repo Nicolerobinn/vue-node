@@ -3,7 +3,7 @@
 import Vue from 'vue'
 import './assets/css/base.css'
 import router from './router'
-import store from './store/store'
+import store from './store/index'
 Vue.config.productionTip = false
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';

@@ -1,8 +1,7 @@
 /* eslint-disable */
 <template>
-  <div  >
-      123
-  </div>
+  <el-container>
+  </el-container>
 </template>
 <script>
   export default {
@@ -13,8 +12,11 @@
       return {
       };
     },
-    computed:{
+  computed: {
+    breadList() {
+    return this.$route.meta.breadList || [];
     }
+  }
   };
 </script>
 

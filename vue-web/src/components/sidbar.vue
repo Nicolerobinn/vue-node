@@ -4,6 +4,7 @@
             <el-menu
             default-active="2"
             class="el-menu-vertical-demo"
+             :collapse="isCollapse"
             router
             >
                 <el-submenu index="1">
@@ -23,6 +24,7 @@
     </div>
 </template>
 <script>
+  import { mapGetters } from 'vuex'
   import sidbarItem from './sidbarItem.vue';
   export default {
     data() {
@@ -33,8 +35,14 @@
         sidbarItem
     },
     computed:{
+        ...mapGetters([
+          'sidebar'
+        ]),
         items(){
             return this.$router.options.routes
+        },
+        isCollapse() {
+          return !this.sidebar.opened
         }
     },
     methods: {
@@ -42,12 +50,4 @@
   }
 </script>
 <style lang="scss" scoped>
->>>.el-menu-item:focus,
->>>.el-menu-item:hover {
-    min-width: auto;
-}
->>>.el-menu-item,
->>>.is-active{
-    min-width: auto;
-}
 </style>

@@ -1,12 +1,9 @@
 /* eslint-disable */
 <template>
-  <div id="box" >
-    <el-row  style="height: 100%; ">
-        <el-col :span="5"   style="min-height: 100%; background-color: #324057;">
-          <SidBar/>
-        </el-col>
-        <el-col :span="19"  style="height: 100%;overflow: auto;" >
-          <div class="content">
+  <div id="box"  :class="classObj" >
+          <SidBar class="sidebar-container"/>
+          <div class="main-container">
+              <navbar />
               <transition name="move" mode="out-in">
                   <keep-alive>
                       <router-view :key="key" v-if="exclude"></router-view>
@@ -16,16 +13,17 @@
                   <router-view :key="key" v-if="!exclude"></router-view>
               </transition>
           </div>
-        </el-col>
-    </el-row>
   </div>
 </template>
 <script>
   import SidBar    from  '@/components/sidbar.vue'
+  import Navbar    from  '@/components/navbar.vue'
+  import { mapState } from 'vuex'
   export default {
     name: "index",
     components: {
-      SidBar
+      SidBar,
+      Navbar
     },
     data() {
       return {
@@ -33,11 +31,20 @@
       };
     },
     computed:{
+        ...mapState({
+          sidebar: state => state.sidebar,
+        }),
         key() {
             return this.$route.fullPath;
         },
         exclude() {
             return this.$route.meta.keepAlive;
+        },
+        classObj() {
+          return {
+            hideSidebar: !this.sidebar.opened,
+            openSidebar: this.sidebar.opened,
+          }
         }
     }
   };

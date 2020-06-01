@@ -9,23 +9,27 @@ Vue.use(Router)
 export const currencyRoutes = [
   {
     path: '/',
-    redirect: '/Index'
+    redirect: '/index'
   },
   {
     path: '/login',
+    name: '登录',
     component: Login
   },
   {
-    path: '/Index',
+    path: '/index',
     component: Index,
+    name: '首页',
     meta: { icon: 'el-icon-excel iconfont', title: '首页' },
     children: [
         {
             path: '/home',
-            name: '介绍',
+            name: '用户',
             meta: {
                 keepAlive: true
             },
+            children: [
+            ],
             component:Home
         },
     ]
@@ -46,6 +50,7 @@ export const asyncRoutes =[
   },
   {
     path: '/login',
+    name: 'Login',
     component: Login
   },
   {
