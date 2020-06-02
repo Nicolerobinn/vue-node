@@ -1,5 +1,6 @@
 var express = require("express");
 var router = express.Router();
-var user = require("../controllers/cateController");
-router.post("/sms", user.sendCode);
+var cate = require("../controllers/cateController");
+router.post("/login", cate.login);
+
 module.exports = router;

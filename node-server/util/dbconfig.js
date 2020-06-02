@@ -5,7 +5,7 @@ module.exports = {
     host: "localhost",
     port: "3306",
     user: "root",
-    password: "root",
+    password: "123456",
     database: "test",
   },
   // 链接数据库，使用mysql的连接池连接方式
@@ -23,4 +23,28 @@ module.exports = {
       conn.release();
     });
   },
+  // 异步
+  // 链接数据库，使用mysql的连接池连接方式
+  // 链接池对象
+  SySqlConnect(sql, sqlArr){
+   return new Promise((resolve,reject)=>{
+    var pool = mysql.createPool(this.config);
+      pool.getConnection((err, conn) => {
+        if (err) {
+          reject(err)
+        }else{
+          //事件驱动回调
+          conn.query(sql, sqlArr, (err,data)=>{
+            if(err){
+              reject(err)
+            }else{
+              resolve(data)
+            }
+          });
+          //释放连接
+          conn.release();
+        }
+      });
+   })
+  }
 };

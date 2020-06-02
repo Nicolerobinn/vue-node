@@ -1,10 +1,10 @@
-const BASE_URL =
-  "http://api.7-orange.cn:7300/mock/5def6a2d448e330a1116366e/api";
 const Urls = {
   send_code: "send_code",
   login_code: "login_code",
-  ddimg: BASE_URL + "/homeApi",
-  youlike:BASE_URL+ "cart/youlike"
+  ddimg:   "/homeApi",
+  youlike:+"cart/youlike",
+  sms:   "/sms",
+  login:   "/login",
 };
 
 export { Urls };

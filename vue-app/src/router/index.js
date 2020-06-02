@@ -42,6 +42,12 @@ const router = new Router({
       component: Index
     },
     {
+      path: "/login",
+      name: "login",
+      component: Login,
+      meta: { title: "登录/注册" },
+    },
+    {
       // 根页面
       path: "/dashboard",
       name: "dashboard",

@@ -8,7 +8,8 @@
 
  // 环境的切换
  if (process.env.NODE_ENV == 'development') {
-     axios.defaults.baseURL = 'http://api.7-orange.cn:7300/mock/5def6a2d448e330a1116366e/api/';
+    //  axios.defaults.baseURL = 'http://api.7-orange.cn:7300/mock/5def6a2d448e330a1116366e/api/';
+     axios.defaults.baseURL = 'http://localhost:3000';
      //配合mock
  } else if (process.env.NODE_ENV == 'debug') {
      axios.defaults.baseURL = '';
@@ -125,6 +126,7 @@
    */
  export function post(url, params) {
      return new Promise((resolve, reject) => {
+         console.log(url)
          axios.post(url, QS.stringify(params))
          .then(res => {
              resolve(res.data);

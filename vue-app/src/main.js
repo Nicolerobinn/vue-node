@@ -6,7 +6,7 @@ import './assets/css/base.css'
 import App from './App'
 import router from './router'
 import store from './store/index'
-require('./mock');
+// require('./mock');
 import waterfall from 'vue-waterfall2'
 Vue.use(waterfall)
 Vue.config.productionTip = false
