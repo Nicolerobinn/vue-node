@@ -4,6 +4,7 @@ const Index = r => require.ensure([], () => r(require('@/page/Index')), 'Index')
 const Login = r => require.ensure([], () => r(require('@/page/Login')), 'Login');
 const page404 = r => require.ensure([], () => r(require('@/page/page404')), 'page404');
 const Home = r => require.ensure([], () => r(require('@/page/Home')), 'Home');
+const Page = r => require.ensure([], () => r(require('@/page/Page')), 'Page');
 Vue.use(Router)
 
 export const currencyRoutes = [
@@ -20,10 +21,11 @@ export const currencyRoutes = [
     path: '/index',
     component: Index,
     name: '首页',
+    redirect: '/index/page',
     meta: { icon: 'el-icon-excel iconfont', title: '首页' },
     children: [
         {
-            path: '/home',
+            path: 'home',
             name: '用户',
             meta: {
                 keepAlive: true
@@ -31,6 +33,14 @@ export const currencyRoutes = [
             children: [
             ],
             component:Home
+        },
+        {
+            path: 'page',
+            name: '页面',
+            meta: {
+                keepAlive: true
+            },
+            component:Page
         },
     ]
   },
@@ -108,6 +118,9 @@ const router = creatRouter()
 export function resetRouter() {
   const reset = creatRouter()
   router.matcher = reset.matcher
+}const routerPush = Router.prototype.push
+Router.prototype.push = function push(location) {
+  return routerPush.call(this, location).catch(error=> error)
 }
 export default router
 
