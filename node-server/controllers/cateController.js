@@ -1,6 +1,6 @@
 // 引入mysql线程池
 var dbCongif = require("../util/dbconfig");
-
+var jwt = require("jsonwebtoken");
 //保存验证码10秒
 var  nodeSms = ''
 
@@ -47,7 +47,7 @@ let sendCode = (req, res) => {
 
 // 登录接口，对登录手机号进行查询，如果未注册，则跳到addUser函数
 // 如果注册则返回JWT
-let login = (req, res) => {
+let login =  async(req, res) => {
   let {phone,sms} = req.body;
   var sql =  'select * from user where phone =?'
   var sqlArr = [phone];
@@ -57,14 +57,16 @@ let login = (req, res) => {
     } else {
       if(nodeSms == sms){
         if(data.length>0){
-         var arr =   JSON.parse(JSON.stringify(data))
+         var arr =   JSON.parse(JSON.stringify(data))[0]
         }else{
           addUser(req, res)
           return
         }
+        //返回jwt
+        let token =  jwt.sign(arr,"secretkey",{ expiresIn: '1day' })
         res.send({
           code: 200,
-          data:{ },
+          data:{token },
           msg: "query success",
           result: "Success",
         })
@@ -87,9 +89,11 @@ let addUser =  async(req, res)=>{
   var sqlArr = [phone,'东哥奥利给_'+rand(1000, 9999),(new Date()).valueOf()];
   let query = await  dbCongif.SySqlConnect(sql, sqlArr)
   if(query){
+    //返回jwt
+    let token =  jwt.sign(query,"secretkey",{ expiresIn: '1day' })
     res.send({
       code: 200,
-      data:{ },
+      data:{ token },
       msg: "query success",
       result: "Success",
     })
@@ -114,6 +118,29 @@ let addUser =  async(req, res)=>{
       }
     }
   };
+}
+function jwtVerify(req){
+  jwt.verify(req.token, 'secretkey', (err, authData) => {
+    if(err) {
+       res.sendStatus(403);
+      } else {
+        res.json({
+          message: 'Post created...',
+          authData
+        });
+     }
+  });
+}
+function verifyToken(req, res, next) {
+  const bearerHeader = req.headers['authorization'];
+  if(typeof bearerHeader !== 'undefined') {
+    const bearer = bearerHeader.split(' ');
+    const bearerToken = bearer[1];
+    req.token = bearerToken;
+    next();
+  } else {
+    res.sendStatus(403);
+  }
 }
 module.exports = {
   getCate,
