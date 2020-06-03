@@ -15,7 +15,7 @@ const Merchandise = () => import("@/page/Merchandise.vue");
 const Index = r => require.ensure([], () => r(require("@/page/Index")), "Home");
 const Login = r => require.ensure([], () => r(require("@/page/Login")), "Home");
 const My = r => require.ensure([], () => r(require("@/page/My")), "Home");
-const Cart = r => require.ensure([], () => r(require("@/page/Cart")), "Home");
+const Cart = r => require.ensure([], () => r(require("@/page/cart/Cart")), "Home");
 const Discover = r =>
   require.ensure([], () => r(require("@/page/Discover")), "Home");
 const Classify = r =>

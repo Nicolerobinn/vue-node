@@ -89,6 +89,7 @@ export default {
        // 添加到购物车
     ...mapMutations(['ADD_TO_CART']),
     addToCart (product, num) {
+      console.log(product)
       this.ADD_TO_CART(product);
         // 取出商品的图片
         this.dropImage = product.small_image;

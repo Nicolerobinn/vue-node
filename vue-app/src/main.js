@@ -13,6 +13,10 @@ Vue.config.productionTip = false
 import 'vant/lib/index.css';
 import Vant,{Lazyload} from 'vant';
 Vue.use(Lazyload)
+import { Toast } from 'vant';
+import { Dialog } from 'vant';
+Vue.use(Toast);
+Vue.use(Dialog);
 Vue.use(Vant);
 /* eslint-disable no-new */
 new Vue({

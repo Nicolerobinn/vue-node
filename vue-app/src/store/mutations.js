@@ -17,7 +17,8 @@ import {
   DELETE_USER_SHOPPING_ADDRESS,
   CHANGE_USER_SHOPPING_ADDRESS,
   SET_EDIT_ADDRESS,
-  CHICKED_USER_ADDRESS
+  CHICKED_USER_ADDRESS,
+  DELETE_PRESENT_GOODS
 } from "./mutation-type";
 import Vue from "vue";
 
@@ -30,6 +31,7 @@ import { ADD_TO_CART } from "@/utils/type";
 export default {
   // 1.添加商品
   [ADD_GOODS](state, { goodsID, goodsName, smallImage, goodsPrice }) {
+    console.log( { goodsID, goodsName, smallImage, goodsPrice })
     let shopCart = state.shopCart;
     // 1.1 判断商品是否存在
     if (shopCart[goodsID]) {
@@ -88,7 +90,6 @@ export default {
   },
   // 4.单个商品选中
   [SINGLE_SELECT_GOODS](state, { goodsID }) {
-    console.log(goodsID);
     // 4.1 取出state中的商品数据
     let shopCart = state.shopCart;
     // 4.2 根据商品id取到goods
@@ -277,6 +278,7 @@ export default {
         smallImage: goods.small_image,
         goodsPrice: goods.price
       });
+      Toast.clear()
       Toast({
         message: "成功加入购物车",
         duration: 800
@@ -300,5 +302,17 @@ export default {
     state.shippingAddress = [...addressArr];
     // 17.2 将数据存储到本地
     setLocalStore("shippingAddress", state.shippingAddress);
+  },
+  // 22.删除当前商品
+  [DELETE_PRESENT_GOODS](state,id) {
+    // 6.1 取出state中的商品数据
+    let shopCart = state.shopCart;
+    Object.values(shopCart).forEach(e => delete shopCart[id]);
+    // 6.3 更新state数据
+    state.shopCart = {
+      ...shopCart
+    };
+    // 6.4 更新本地数据
+    setLocalStore("shopCart", state.shopCart);
   },
 };
