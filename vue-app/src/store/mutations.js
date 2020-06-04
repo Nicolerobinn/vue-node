@@ -31,7 +31,6 @@ import { ADD_TO_CART } from "@/utils/type";
 export default {
   // 1.添加商品
   [ADD_GOODS](state, { goodsID, goodsName, smallImage, goodsPrice }) {
-    console.log( { goodsID, goodsName, smallImage, goodsPrice })
     let shopCart = state.shopCart;
     // 1.1 判断商品是否存在
     if (shopCart[goodsID]) {

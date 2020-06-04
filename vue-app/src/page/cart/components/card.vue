@@ -16,7 +16,7 @@
                     <div  class="van-card__price">
                         <span>{{list.price | moneyFormat}}</span>
                     </div>
-                    <van-stepper button-size="20px"  :value="value"   @overlimit="overlimit" @plus="plus"  disable-input />
+                    <van-stepper button-size="20px"  :value="value" @minus="minus"   @overlimit="overlimit" @plus="plus"  disable-input />
                 </div>
                 </div>
         </div>
@@ -39,10 +39,10 @@
       this.checked = this.list.checked
     },
     methods: {
-      ...mapMutations(['ADD_TO_CART','SINGLE_SELECT_GOODS']),
+      ...mapMutations(['ADD_TO_CART','SINGLE_SELECT_GOODS','DELETE_PRESENT_GOODS','REDUCE_GOODS']),
         overlimit(){
             this.$dialog({message: '确定删除该商品吗？',showCancelButton:true}) .then(() => {
-              // on confirm
+              this.DELETE_PRESENT_GOODS(this.list.id)
             })
             .catch(() => {
               // on cancel
@@ -54,6 +54,9 @@
               forbidClick: true,
               loadingType: 'spinner',
             });
+        },
+        minus(){
+            this.REDUCE_GOODS({goodsID:this.list.id})
         },
         click(id){
           this.SINGLE_SELECT_GOODS({goodsID:id})

@@ -6,7 +6,7 @@
      fixed
      placeholder
       >
-      <template #right   >
+      <template v-if="num>0" #right   >
         <span   @click="del">删除</span>
       </template>
     </van-nav-bar>
@@ -23,6 +23,7 @@
     data() {
       return {
         title:'购物车',
+        num:0
       };
     },
     components:{
@@ -31,19 +32,27 @@
      computed:{
     ...mapState(['shopCart']),
      },
+     watch:{
+      shopCart(old){
+        this.num=0
+        for(let key in old){
+          if(old[key].checked){
+            this.num++
+          }
+        }
+      }
+     },
     methods: {
        // 添加到购物车
-    ...mapMutations(['ADD_TO_CART']),
+    ...mapMutations(['DELETE_SELECT_GOODS']),
         del(){
-            Toast('del')
-          console.log(this.shopCart)
+            this.$dialog({message: '确定删除选中该商品吗？',showCancelButton:true}) .then(() => {
+              this.DELETE_SELECT_GOODS()
+            })
+            .catch(() => {
+              // on cancel
+            })
         },
-        overlimit(){
-            Toast('overlimit')
-        },
-        plus(){
-            Toast('plus')
-        }
     },
   };
 </script>

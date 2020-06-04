@@ -126,7 +126,6 @@
    */
  export function post(url, params) {
      return new Promise((resolve, reject) => {
-         console.log(url)
          axios.post(url, QS.stringify(params))
          .then(res => {
              resolve(res.data);
