@@ -2,32 +2,37 @@
 <template>
   <div>
     <van-nav-bar
-    :title="title"
-     fixed
-     placeholder
-      >
+      :title="title"
+      fixed
+      placeholder
+      bgc="#fff"
+        >
       <template v-if="num>0" #right   >
         <span   @click="del">删除</span>
       </template>
     </van-nav-bar>
     <swiperCard/>
+    <close-account v-show="cartLength>0" :num="num"/>
   </div>
 </template>
 <script>
   import { mapState, mapMutations } from 'vuex'
   import { moneyFormat } from '@/filter'
   import swiperCard from './components/swiperCard.vue'
+  import closeAccount from'./components/closeAccount.vue'
   import Toast from 'vant'
   export default {
     name: "Cart",
     data() {
       return {
         title:'购物车',
-        num:0
+        num:0,
+        cartLength:0
       };
     },
      components:{
-      swiperCard
+      swiperCard,
+      closeAccount
      },
      computed:{
     ...mapState(['shopCart']),
@@ -37,23 +42,25 @@
         this.computedShopCart(old)
       }
      },
-     mounted(){
+    activated(){
         if(this.shopCart){
           console.log(this.shopCart)
           this.computedShopCart(this.shopCart)
         }
-     },
+    },
     methods: {
        // 添加到购物车
     ...mapMutations(['DELETE_SELECT_GOODS']),
-    computedShopCart(old){
-        this.num=0
-        for(let key in old){
-          if(old[key].checked){
-            this.num++
-          }
-        }
-    },
+        computedShopCart(old){
+            this.num  = 0
+            this.cartLength = 0
+            for(let key in old){
+              this.cartLength++
+              if(old[key].checked){
+                this.num++
+              }
+            }
+        },
         del(){
             this.$dialog({message: '确定删除选中该商品吗？',showCancelButton:true}) .then(() => {
               this.DELETE_SELECT_GOODS()

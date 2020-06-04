@@ -52,6 +52,9 @@
       this.checked = this.list.checked
         this.initSwiper()
     },
+    activated(){
+        this.initSwiper()
+    },
     watch:{
       list(){
         this.initSwiper()
@@ -85,6 +88,7 @@
         },
         initSwiper() {
           const that = this
+          console.log('开始渲染')
           this.mySwiper = new Swiper('.swiper-container', {
               slidesPerView: 'auto',
               resistanceRatio:.95,
@@ -121,12 +125,11 @@
 </script>
 
 <style lang="scss" scoped>
+   @import '@/assets/css/mixin.scss';
   .card{
       padding: 8px;
     .card-content{
-      display: -webkit-box;
-      display: -webkit-flex;
-      display: flex;
+      @include display-flex;
       height: 60px;
       .van-checkbox{
         margin-right: 10px;
@@ -143,9 +146,7 @@
       }
       .card-content-right{
               position: relative;
-              display: -webkit-box;
-              display: -webkit-flex;
-              display: flex;
+              @include display-flex;
               -webkit-box-flex: 1;
               -webkit-flex: 1;
               flex: 1;
