@@ -5,12 +5,7 @@
 
     </div>
     <div  v-else>
-      <van-swipe-cell v-for="(item,index) in shopCart" :key="index" >
-        <card  :list="item" />
-        <template #right>
-          <van-button square text="删除" type="danger" class="delete-button" @click="click(item.id)" />
-        </template>
-      </van-swipe-cell>
+          <card   v-for="(item,index) in shopCart" :key="index"   :list="item" />
     </div>
   </div>
 </template>
@@ -36,7 +31,7 @@
       ...mapMutations(['DELETE_PRESENT_GOODS']),
       click(id){
         this.DELETE_PRESENT_GOODS(id)
-      }
+      },
     },
   };
 </script>

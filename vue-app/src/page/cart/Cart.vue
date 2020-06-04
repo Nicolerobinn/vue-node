@@ -26,7 +26,7 @@
         num:0
       };
     },
-    components:{
+     components:{
       swiperCard
      },
      computed:{
@@ -34,17 +34,26 @@
      },
      watch:{
       shopCart(old){
+        this.computedShopCart(old)
+      }
+     },
+     mounted(){
+        if(this.shopCart){
+          console.log(this.shopCart)
+          this.computedShopCart(this.shopCart)
+        }
+     },
+    methods: {
+       // 添加到购物车
+    ...mapMutations(['DELETE_SELECT_GOODS']),
+    computedShopCart(old){
         this.num=0
         for(let key in old){
           if(old[key].checked){
             this.num++
           }
         }
-      }
-     },
-    methods: {
-       // 添加到购物车
-    ...mapMutations(['DELETE_SELECT_GOODS']),
+    },
         del(){
             this.$dialog({message: '确定删除选中该商品吗？',showCancelButton:true}) .then(() => {
               this.DELETE_SELECT_GOODS()
