@@ -48,16 +48,20 @@
       };
     },
     mounted(){
-      this.value = this.list.num
-      this.checked = this.list.checked
         this.initSwiper()
     },
     activated(){
         this.initSwiper()
     },
     watch:{
-      list(){
-        this.initSwiper()
+      list:{
+         handler(old){
+            this.value = old.num
+            this.checked = old.checked
+         },
+         deep: true,
+    　　 immediate:true,
+
       }
     },
     methods: {

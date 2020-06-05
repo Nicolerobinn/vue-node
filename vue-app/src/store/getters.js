@@ -2,11 +2,22 @@ import {
     SELECTED_GOODS_COUNT,
     SELECTED_GOODS,
     SELECTED_GOODS_PRICE,
-    USER_SEX
+    USER_SEX,
+    PRODUCT_NUMS,
+    SELECTED_ALL
 } from "./mutation-type";
 
 
 export default {
+    PRODUCT_NUMS(state){
+        let count = 0;
+        let shopCart = state.shopCart;
+        Object.values(shopCart).forEach((goods, index) => {
+            count+=goods.num
+        });
+        return count;
+
+    },
     // 1. 选中商品的数量
     SELECTED_GOODS_COUNT(state) {
         // 3.1 取出state中的商品数据
@@ -38,11 +49,24 @@ export default {
         // 3.1 取到shopCart里面的数据遍历找到选中的goods计算总价
         Object.values(state.shopCart).forEach((goods, index) => {
             if (goods.checked) {
-                // 3.2 计算总价,由于Vant的SubmitBar组件接受的价格格式是保留两位小数且中间不需要.所以需要转换下
-                totalPrice += (goods.price * goods.num * 100)
+                totalPrice += (goods.price * goods.num )
             }
         });
         return totalPrice;
+    },
+    //  全选按钮状态
+    SELECTED_ALL(state) {
+        // 3.1 取出state中的商品数据
+        let count = 0;
+        let shopCart = state.shopCart;
+        let length = 0
+        Object.values(shopCart).forEach((goods, index) => {
+            length++
+            if (goods.checked) {
+                count++;
+            }
+        });
+        return count == length;
     },
     // 性别
     [USER_SEX](state) {

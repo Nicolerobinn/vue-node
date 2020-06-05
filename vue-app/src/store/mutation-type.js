@@ -47,3 +47,7 @@ export const SET_EDIT_ADDRESS= 'SET_EDIT_ADDRESS';
 export const CHICKED_USER_ADDRESS= 'CHICKED_USER_ADDRESS';
 // 20.删除当前选中商品
 export const DELETE_PRESENT_GOODS= 'DELETE_PRESENT_GOODS';
+// 21.当前商品数量
+export const PRODUCT_NUMS= 'PRODUCT_NUMS';
+// 22.全选按钮状态
+export const SELECTED_ALL= 'SELECTED_ALL';

@@ -2,10 +2,10 @@
 <template>
   <div class="bottom-close" >
     <div  class="close-content">
-        <van-checkbox @click="click" v-model="checked" />
+        <van-checkbox @click="click"  v-model="checked" />
         <div  class="close-content-left" >
             <div class="content-top"  >
-                 <p>合计<span class="red" >{{20 | moneyFormat}}</span></p>
+                 <p>合计<span class="red" >{{ SELECTED_GOODS_PRICE| moneyFormat}}</span></p>
                  <p><span>满{{1000000|moneyFormat}}可免配送费</span></p>
             </div>
             <van-button type="primary" round   size="small"  url="/vant/mobile.html">
@@ -18,6 +18,7 @@
 </template>
 <script>
 import { Toast } from "vant";
+import { mapState, mapMutations,mapGetters } from 'vuex'
 import {getLocalStore} from '@/utils/common'
 import { moneyFormat } from '@/filter'
 export default {
@@ -25,17 +26,28 @@ export default {
   props: ['num'],
   data() {
     return {
-        checked:true
+        checked: false,
     };
   },
-  mounted() {
+  computed:{
+    ...mapGetters(['SELECTED_GOODS_PRICE','SELECTED_ALL']),
+    ...mapState(['shopCart'])
   },
-  watch: {
+  watch:{
+    SELECTED_ALL:{
+      	handler(cval, oval) {
+          this.checked = cval
+				},
+				deep: true
+    }
   },
   methods: {
-      click(){
-
-      }
+       // 添加到购物车
+    ...mapMutations(['ALL_SELECT_GOODS']),
+    click(){
+          let isCheckedAll = this.checked
+          this.ALL_SELECT_GOODS({isCheckedAll})
+    }
   }
 };
 </script>

@@ -111,17 +111,12 @@ export default {
     // 4.8 将数据更新到本地
     setLocalStore("shopCart", state.shopCart);
   },
-  // 5.全选商品 外界出过来一个isSelected
+  // 5.全选商品 外界传过来一个isSelected
   [ALL_SELECT_GOODS](state, { isCheckedAll }) {
     // 5.1 取出state中的商品数据
     let shopCart = state.shopCart;
     Object.values(shopCart).forEach((goods, index) => {
-      if (goods.checked) {
-        // 存在该属性
-        goods.checked = !isCheckedAll;
-      } else {
-        Vue.set(goods, "checked", !isCheckedAll);
-      }
+      goods.checked = isCheckedAll
     });
     // 5.2 同步state数据
     state.shopCart = {
