@@ -11,11 +11,12 @@ const Map = () => import("@/page/home/Map.vue");
 const NewLocation = () => import("@/page/home/NewLocation.vue");
 const Secarch = () => import("@/page/home/Secarch.vue");
 const Merchandise = () => import("@/page/Merchandise.vue");
-
+const CartDetail = () => import("@/page/CartDetail.vue");
 const Index = r => require.ensure([], () => r(require("@/page/Index")), "Home");
 const Login = r => require.ensure([], () => r(require("@/page/Login")), "Home");
 const My = r => require.ensure([], () => r(require("@/page/My")), "Home");
-const Cart = r => require.ensure([], () => r(require("@/page/cart/Cart")), "Home");
+const Cart = r =>
+  require.ensure([], () => r(require("@/page/cart/Cart")), "Home");
 const Discover = r =>
   require.ensure([], () => r(require("@/page/Discover")), "Home");
 const Classify = r =>
@@ -45,7 +46,7 @@ const router = new Router({
       path: "/login",
       name: "login",
       component: Login,
-      meta: { title: "登录/注册" },
+      meta: { title: "登录/注册" }
     },
     {
       // 根页面
@@ -132,6 +133,12 @@ const router = new Router({
           name: "map",
           meta: { isBack: true, title: "选择地址", isTabShow: false },
           component: Map
+        },
+        {
+          path: "cartDetail",
+          name: "cartDetail",
+          meta: { isBack: true, isTabShow: false },
+          component: CartDetail
         }
       ]
     }

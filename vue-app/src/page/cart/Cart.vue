@@ -2,13 +2,13 @@
 <template>
   <div>
     <van-nav-bar :title="title" fixed placeholder bgc="#fff">
-      <template v-if="PRODUCT_NUMS>0" #right>
+      <template v-if="SELECTED_GOODS_COUNT > 0" #right>
         <span @click="del">删除</span>
       </template>
     </van-nav-bar>
     <swiperCard />
-    <close-account v-show="PRODUCT_NUMS>0" :num="PRODUCT_NUMS" />
-    <guess-like :class="{padding:PRODUCT_NUMS>0}" />
+    <close-account v-show="PRODUCT_NUMS > 0" :num="PRODUCT_NUMS" />
+    <guess-like :class="{ padding: PRODUCT_NUMS > 0 }" />
   </div>
 </template>
 <script>
@@ -31,7 +31,7 @@ export default {
     guessLike
   },
   computed: {
-    ...mapGetters(["PRODUCT_NUMS"]),
+    ...mapGetters(["PRODUCT_NUMS", "SELECTED_GOODS_COUNT"]),
     ...mapState(["shopCart"])
   },
   methods: {
@@ -108,7 +108,7 @@ export default {
     }
   }
 }
-.padding{
+.padding {
   padding-bottom: 50px;
 }
 </style>
