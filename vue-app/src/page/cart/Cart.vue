@@ -8,7 +8,7 @@
     </van-nav-bar>
     <swiperCard />
     <close-account v-show="PRODUCT_NUMS>0" :num="PRODUCT_NUMS" />
-    <guess-like />
+    <guess-like :class="{padding:PRODUCT_NUMS>0}" />
   </div>
 </template>
 <script>
@@ -107,5 +107,8 @@ export default {
       }
     }
   }
+}
+.padding{
+  padding-bottom: 50px;
 }
 </style>

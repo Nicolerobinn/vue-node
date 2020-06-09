@@ -37,7 +37,8 @@ export default {
     SELECTED_ALL:{
       	handler(cval, oval) {
           this.checked = cval
-				},
+        },
+        immediate:true,
 				deep: true
     }
   },
@@ -57,7 +58,7 @@ export default {
 .bottom-close{
     padding: 8px;
     width: 100%;
-    background-color: skyblue;
+    background-color: #fde9e9;
     position: fixed;
     bottom: 49px;
     z-index: 9;

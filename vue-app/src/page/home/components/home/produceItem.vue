@@ -2,11 +2,10 @@
 <template>
   <div id="produceItem">
     <waterfall :col='2'   :data="arr"     >
-      <template>
         <div class="item"
             v-for="(product,index) in arr"
             :key="index"
-            @click.stop="goToGoodsDetail(product)">
+            >
           <img v-lazy="product.small_image"
               alt="">
           <p class="itemTitle">{{product.name}}</p>
@@ -15,11 +14,8 @@
             {{product.price | moneyFormat}}
           </span>
           <span class="originPrice">{{product.origin_price | moneyFormat}}</span>
-          <div class="buyCar"
-              @click.stop="addCart(product)">
-          </div>
+          <van-icon class="after" name="cart-circle"  @click.stop="addToCart(product,index)" />
         </div>
-      </template>
     </waterfall>
   </div>
 </template>
@@ -27,8 +23,10 @@
 <script type="text/javascript">
 import { moneyFormat } from '@/filter'
 import { mapMutations } from 'vuex'
+import { CartMixin } from '@/mixins/cart.js';
 
 export default {
+  mixins: [CartMixin],
   props: {
     arr: Array
   },
@@ -40,9 +38,8 @@ export default {
   components: {
   },
   methods: {
-    ...mapMutations({
-      addCart: 'ADD_TO_CART'
-    }),
+       // 添加到购物车
+    ...mapMutations(['ADD_TO_CART']),
     // 商品详情页面
     goToGoodsDetail (goods) {
       // 跳转到商品详情页面并且传值
@@ -64,6 +61,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '@/assets/css/mixin.scss';
+@include  cart;
 #produceItem {
   background-color: #f5f5f5;
   height: auto;
@@ -76,7 +75,7 @@ export default {
   background-color: white;
   border-radius: 6px;
   padding-bottom: 10px;
-    img {
+    >img {
       width: 92%;
       margin: 0 auto;
       display: block;
@@ -109,19 +108,13 @@ export default {
       color: #f37078;
       font-size: 12px;
     }
-    &::After{
-      content: "+";
-      position: absolute;
-      right: 0.4rem;
-      bottom: 0.4rem;
-      width: 0.5625rem;
-      height: 0.5625rem;
-      border-radius: 50%;
-      font-size: 0.5rem;
-      background-color: #1AC694;
-      color: #fff;
-      text-align: center;
-      line-height: 0.5625rem;
+
+  .after {
+    position: absolute;
+    right: 15px;
+    bottom: 15px;
+    font-size: 20px;
+    color:#1AC694;
   }
 }
 .tagEat {
@@ -139,12 +132,5 @@ export default {
   font-size: 10px;
   color: #999999;
   text-decoration: line-through;
-}
-.buyCar {
-  position: absolute;
-  height: 1.5rem;
-  width: 1.5rem;
-  right: 32px;
-  bottom: 16px;
 }
 </style>
