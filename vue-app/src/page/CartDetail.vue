@@ -15,23 +15,41 @@
         <span class="old-price">{{ obj.origin_price | moneyFormat }}</span>
       </p>
     </div>
-    <div></div>
+    <div class="bottom" >
+      <van-icon name="shopping-cart-o" :badge="badge" />
+        <van-button @click="addToCart" type="primary" round   size="small"  >
+            <span >加入购物车</span>
+        </van-button>
+    </div>
   </div>
 </template>
 <script>
+import { mapState, mapMutations } from 'vuex'
 import { moneyFormat } from "@/filter";
 export default {
   name: "CratDetail",
   data() {
     return {
       img: "",
-      obj: {}
+      obj: {},
     };
   },
   components: {},
+  computed: {
+    ...mapState(['shopCart'], ['userInfo']),
+    badge () {
+      let ID = this.obj.id
+      let num  = ''
+      Object.values(this.shopCart).forEach((item, index) => {
+          if(item.id == ID){
+            num =   item.num;
+          }
+      });
+      return num
+    }
+  },
   created() {
     this.obj = this.$route.query;
-    console.log(this.obj);
     const {
       name,
       origin_price,
@@ -42,14 +60,20 @@ export default {
     } = this.$route.query;
   },
   methods: {
+    // 0. 延展mutations方法
+    ...mapMutations(['INIT_SHOP_CART', 'INIT_USER_INFO','ADD_TO_CART']),
     click() {
       this.$router.go(-1);
-    }
+    },
+    addToCart () {
+     this.ADD_TO_CART(this.obj);
+    },
   }
 };
 </script>
 
 <style lang="scss" scoped>
+   @import '@/assets/css/mixin.scss';
 .swiper {
   height: 380px;
   img {
@@ -85,5 +109,17 @@ export default {
   p {
     margin: 5px;
   }
+}
+.bottom{
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  @include display-flex;
+  justify-content: space-between;
+}
+.van-icon-shopping-cart-o{
+  font-size: 22px;
 }
 </style>

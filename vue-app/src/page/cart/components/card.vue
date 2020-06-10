@@ -109,6 +109,7 @@
         },
         compare(){
           if(this.$refs.viewBox){
+            console.log(this.$route.name)
             let transformX =  this.getMatrix(this.$refs.viewBox).x
             if(transformX<0&& Math.abs(transformX)>this.width){
               this.deleteProduct()

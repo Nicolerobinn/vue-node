@@ -23,7 +23,6 @@
   </div>
 </template>
 <script>
-import { setLocalStore, getLocalStore } from '@/utils/common.js'
 import { mapState, mapMutations } from 'vuex'
 export default {
   name: "tabBar",
